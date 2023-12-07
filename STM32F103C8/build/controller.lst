@@ -1,0 +1,686 @@
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"controller.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.play_glitch,"ax",%progbits
+  18              		.align	1
+  19              		.global	play_glitch
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	play_glitch:
+  25              	.LVL0:
+  26              	.LFB4:
+  27              		.file 1 "controller.c"
+   1:controller.c  **** #include "controller.h"
+   2:controller.c  **** #include "stddef.h"
+   3:controller.c  **** #include "digit_swapper.h"
+   4:controller.c  **** #include "rtc.h"
+   5:controller.c  **** 
+   6:controller.c  **** time_t editable_time;
+   7:controller.c  **** 
+   8:controller.c  **** controller_state_t current_state;
+   9:controller.c  **** 
+  10:controller.c  **** // this funnction executes on entering hours editing mode
+  11:controller.c  **** 
+  12:controller.c  **** void enter_hour_edit(controller_evt_t event) {
+  13:controller.c  ****     // enable blink for hour digits
+  14:controller.c  ****     digit_swapper_enable_blink(0);
+  15:controller.c  ****     digit_swapper_enable_blink(1);
+  16:controller.c  ****     // get current time
+  17:controller.c  ****     rtc_get_time(&editable_time);
+  18:controller.c  ****     // start time editing procedure
+  19:controller.c  ****     digit_swapper_set_time(&editable_time);
+  20:controller.c  ****     current_state = STATE_EDIT_HOURS;
+  21:controller.c  **** }
+  22:controller.c  **** 
+  23:controller.c  **** // this funnction executes on entering minutes editing mode
+  24:controller.c  **** 
+  25:controller.c  **** void enter_min_edit(controller_evt_t event) {
+  26:controller.c  ****     // disable hour digits blink
+  27:controller.c  ****     digit_swapper_disable_blink(0);
+  28:controller.c  ****     digit_swapper_disable_blink(1);
+  29:controller.c  ****     // enable minute digits blink
+  30:controller.c  ****     digit_swapper_enable_blink(2);
+  31:controller.c  ****     digit_swapper_enable_blink(3);
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 2
+
+
+  32:controller.c  ****     current_state = STATE_EDIT_MINUTES;
+  33:controller.c  **** }
+  34:controller.c  **** 
+  35:controller.c  **** // handle hours editing
+  36:controller.c  **** 
+  37:controller.c  **** void increase_hours(controller_evt_t event) {
+  38:controller.c  ****     editable_time.hours++;
+  39:controller.c  ****     if(editable_time.hours>23) editable_time.hours = 0;
+  40:controller.c  ****     digit_swapper_set_time(&editable_time);
+  41:controller.c  ****     current_state = STATE_EDIT_HOURS;
+  42:controller.c  **** }
+  43:controller.c  **** 
+  44:controller.c  **** // handle minutes editing
+  45:controller.c  **** 
+  46:controller.c  **** void increase_minutes(controller_evt_t event) {
+  47:controller.c  ****     editable_time.minutes++;
+  48:controller.c  ****     if(editable_time.minutes>59) editable_time.minutes = 0;
+  49:controller.c  ****     digit_swapper_set_time(&editable_time);
+  50:controller.c  ****     current_state = STATE_EDIT_MINUTES;
+  51:controller.c  **** }
+  52:controller.c  **** 
+  53:controller.c  **** // random glitch
+  54:controller.c  **** 
+  55:controller.c  **** void play_glitch(controller_evt_t event) {
+  28              		.loc 1 55 42 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  56:controller.c  ****     // to be done
+  57:controller.c  ****     current_state = STATE_MAIN;
+  33              		.loc 1 57 5 view .LVU1
+  34              		.loc 1 57 19 is_stmt 0 view .LVU2
+  35 0000 014B     		ldr	r3, .L2
+  36 0002 0022     		movs	r2, #0
+  37 0004 1A70     		strb	r2, [r3]
+  58:controller.c  **** }
+  38              		.loc 1 58 1 view .LVU3
+  39 0006 7047     		bx	lr
+  40              	.L3:
+  41              		.align	2
+  42              	.L2:
+  43 0008 00000000 		.word	.LANCHOR0
+  44              		.cfi_endproc
+  45              	.LFE4:
+  47              		.section	.text.enter_hour_edit,"ax",%progbits
+  48              		.align	1
+  49              		.global	enter_hour_edit
+  50              		.syntax unified
+  51              		.thumb
+  52              		.thumb_func
+  54              	enter_hour_edit:
+  55              	.LVL1:
+  56              	.LFB0:
+  12:controller.c  ****     // enable blink for hour digits
+  57              		.loc 1 12 46 is_stmt 1 view -0
+  58              		.cfi_startproc
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 3
+
+
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  12:controller.c  ****     // enable blink for hour digits
+  61              		.loc 1 12 46 is_stmt 0 view .LVU5
+  62 0000 10B5     		push	{r4, lr}
+  63              	.LCFI0:
+  64              		.cfi_def_cfa_offset 8
+  65              		.cfi_offset 4, -8
+  66              		.cfi_offset 14, -4
+  14:controller.c  ****     digit_swapper_enable_blink(1);
+  67              		.loc 1 14 5 is_stmt 1 view .LVU6
+  68 0002 0020     		movs	r0, #0
+  69              	.LVL2:
+  14:controller.c  ****     digit_swapper_enable_blink(1);
+  70              		.loc 1 14 5 is_stmt 0 view .LVU7
+  71 0004 FFF7FEFF 		bl	digit_swapper_enable_blink
+  72              	.LVL3:
+  15:controller.c  ****     // get current time
+  73              		.loc 1 15 5 is_stmt 1 view .LVU8
+  74 0008 0120     		movs	r0, #1
+  75 000a FFF7FEFF 		bl	digit_swapper_enable_blink
+  76              	.LVL4:
+  17:controller.c  ****     // start time editing procedure
+  77              		.loc 1 17 5 view .LVU9
+  78 000e 054C     		ldr	r4, .L6
+  79 0010 2046     		mov	r0, r4
+  80 0012 FFF7FEFF 		bl	rtc_get_time
+  81              	.LVL5:
+  19:controller.c  ****     current_state = STATE_EDIT_HOURS;
+  82              		.loc 1 19 5 view .LVU10
+  83 0016 2046     		mov	r0, r4
+  84 0018 FFF7FEFF 		bl	digit_swapper_set_time
+  85              	.LVL6:
+  20:controller.c  **** }
+  86              		.loc 1 20 5 view .LVU11
+  20:controller.c  **** }
+  87              		.loc 1 20 19 is_stmt 0 view .LVU12
+  88 001c 024B     		ldr	r3, .L6+4
+  89 001e 0122     		movs	r2, #1
+  90 0020 1A70     		strb	r2, [r3]
+  21:controller.c  **** 
+  91              		.loc 1 21 1 view .LVU13
+  92 0022 10BD     		pop	{r4, pc}
+  93              	.L7:
+  94              		.align	2
+  95              	.L6:
+  96 0024 00000000 		.word	.LANCHOR1
+  97 0028 00000000 		.word	.LANCHOR0
+  98              		.cfi_endproc
+  99              	.LFE0:
+ 101              		.section	.text.increase_hours,"ax",%progbits
+ 102              		.align	1
+ 103              		.global	increase_hours
+ 104              		.syntax unified
+ 105              		.thumb
+ 106              		.thumb_func
+ 108              	increase_hours:
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 4
+
+
+ 109              	.LVL7:
+ 110              	.LFB2:
+  37:controller.c  ****     editable_time.hours++;
+ 111              		.loc 1 37 45 is_stmt 1 view -0
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+  37:controller.c  ****     editable_time.hours++;
+ 115              		.loc 1 37 45 is_stmt 0 view .LVU15
+ 116 0000 08B5     		push	{r3, lr}
+ 117              	.LCFI1:
+ 118              		.cfi_def_cfa_offset 8
+ 119              		.cfi_offset 3, -8
+ 120              		.cfi_offset 14, -4
+  38:controller.c  ****     if(editable_time.hours>23) editable_time.hours = 0;
+ 121              		.loc 1 38 5 is_stmt 1 view .LVU16
+  38:controller.c  ****     if(editable_time.hours>23) editable_time.hours = 0;
+ 122              		.loc 1 38 18 is_stmt 0 view .LVU17
+ 123 0002 084A     		ldr	r2, .L11
+ 124 0004 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  38:controller.c  ****     if(editable_time.hours>23) editable_time.hours = 0;
+ 125              		.loc 1 38 24 view .LVU18
+ 126 0006 0133     		adds	r3, r3, #1
+ 127 0008 DBB2     		uxtb	r3, r3
+ 128 000a 1370     		strb	r3, [r2]
+  39:controller.c  ****     digit_swapper_set_time(&editable_time);
+ 129              		.loc 1 39 5 is_stmt 1 view .LVU19
+  39:controller.c  ****     digit_swapper_set_time(&editable_time);
+ 130              		.loc 1 39 7 is_stmt 0 view .LVU20
+ 131 000c 172B     		cmp	r3, #23
+ 132 000e 02D9     		bls	.L9
+  39:controller.c  ****     digit_swapper_set_time(&editable_time);
+ 133              		.loc 1 39 32 is_stmt 1 discriminator 1 view .LVU21
+  39:controller.c  ****     digit_swapper_set_time(&editable_time);
+ 134              		.loc 1 39 52 is_stmt 0 discriminator 1 view .LVU22
+ 135 0010 1346     		mov	r3, r2
+ 136 0012 0022     		movs	r2, #0
+ 137 0014 1A70     		strb	r2, [r3]
+ 138              	.L9:
+  40:controller.c  ****     current_state = STATE_EDIT_HOURS;
+ 139              		.loc 1 40 5 is_stmt 1 view .LVU23
+ 140 0016 0348     		ldr	r0, .L11
+ 141              	.LVL8:
+  40:controller.c  ****     current_state = STATE_EDIT_HOURS;
+ 142              		.loc 1 40 5 is_stmt 0 view .LVU24
+ 143 0018 FFF7FEFF 		bl	digit_swapper_set_time
+ 144              	.LVL9:
+  41:controller.c  **** }
+ 145              		.loc 1 41 5 is_stmt 1 view .LVU25
+  41:controller.c  **** }
+ 146              		.loc 1 41 19 is_stmt 0 view .LVU26
+ 147 001c 024B     		ldr	r3, .L11+4
+ 148 001e 0122     		movs	r2, #1
+ 149 0020 1A70     		strb	r2, [r3]
+  42:controller.c  **** 
+ 150              		.loc 1 42 1 view .LVU27
+ 151 0022 08BD     		pop	{r3, pc}
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 5
+
+
+ 152              	.L12:
+ 153              		.align	2
+ 154              	.L11:
+ 155 0024 00000000 		.word	.LANCHOR1
+ 156 0028 00000000 		.word	.LANCHOR0
+ 157              		.cfi_endproc
+ 158              	.LFE2:
+ 160              		.section	.text.increase_minutes,"ax",%progbits
+ 161              		.align	1
+ 162              		.global	increase_minutes
+ 163              		.syntax unified
+ 164              		.thumb
+ 165              		.thumb_func
+ 167              	increase_minutes:
+ 168              	.LVL10:
+ 169              	.LFB3:
+  46:controller.c  ****     editable_time.minutes++;
+ 170              		.loc 1 46 47 is_stmt 1 view -0
+ 171              		.cfi_startproc
+ 172              		@ args = 0, pretend = 0, frame = 0
+ 173              		@ frame_needed = 0, uses_anonymous_args = 0
+  46:controller.c  ****     editable_time.minutes++;
+ 174              		.loc 1 46 47 is_stmt 0 view .LVU29
+ 175 0000 08B5     		push	{r3, lr}
+ 176              	.LCFI2:
+ 177              		.cfi_def_cfa_offset 8
+ 178              		.cfi_offset 3, -8
+ 179              		.cfi_offset 14, -4
+  47:controller.c  ****     if(editable_time.minutes>59) editable_time.minutes = 0;
+ 180              		.loc 1 47 5 is_stmt 1 view .LVU30
+  47:controller.c  ****     if(editable_time.minutes>59) editable_time.minutes = 0;
+ 181              		.loc 1 47 18 is_stmt 0 view .LVU31
+ 182 0002 084A     		ldr	r2, .L16
+ 183 0004 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+  47:controller.c  ****     if(editable_time.minutes>59) editable_time.minutes = 0;
+ 184              		.loc 1 47 26 view .LVU32
+ 185 0006 0133     		adds	r3, r3, #1
+ 186 0008 DBB2     		uxtb	r3, r3
+ 187 000a 5370     		strb	r3, [r2, #1]
+  48:controller.c  ****     digit_swapper_set_time(&editable_time);
+ 188              		.loc 1 48 5 is_stmt 1 view .LVU33
+  48:controller.c  ****     digit_swapper_set_time(&editable_time);
+ 189              		.loc 1 48 7 is_stmt 0 view .LVU34
+ 190 000c 3B2B     		cmp	r3, #59
+ 191 000e 02D9     		bls	.L14
+  48:controller.c  ****     digit_swapper_set_time(&editable_time);
+ 192              		.loc 1 48 34 is_stmt 1 discriminator 1 view .LVU35
+  48:controller.c  ****     digit_swapper_set_time(&editable_time);
+ 193              		.loc 1 48 56 is_stmt 0 discriminator 1 view .LVU36
+ 194 0010 1346     		mov	r3, r2
+ 195 0012 0022     		movs	r2, #0
+ 196 0014 5A70     		strb	r2, [r3, #1]
+ 197              	.L14:
+  49:controller.c  ****     current_state = STATE_EDIT_MINUTES;
+ 198              		.loc 1 49 5 is_stmt 1 view .LVU37
+ 199 0016 0348     		ldr	r0, .L16
+ 200              	.LVL11:
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 6
+
+
+  49:controller.c  ****     current_state = STATE_EDIT_MINUTES;
+ 201              		.loc 1 49 5 is_stmt 0 view .LVU38
+ 202 0018 FFF7FEFF 		bl	digit_swapper_set_time
+ 203              	.LVL12:
+  50:controller.c  **** }
+ 204              		.loc 1 50 5 is_stmt 1 view .LVU39
+  50:controller.c  **** }
+ 205              		.loc 1 50 19 is_stmt 0 view .LVU40
+ 206 001c 024B     		ldr	r3, .L16+4
+ 207 001e 0222     		movs	r2, #2
+ 208 0020 1A70     		strb	r2, [r3]
+  51:controller.c  **** 
+ 209              		.loc 1 51 1 view .LVU41
+ 210 0022 08BD     		pop	{r3, pc}
+ 211              	.L17:
+ 212              		.align	2
+ 213              	.L16:
+ 214 0024 00000000 		.word	.LANCHOR1
+ 215 0028 00000000 		.word	.LANCHOR0
+ 216              		.cfi_endproc
+ 217              	.LFE3:
+ 219              		.section	.text.update_time,"ax",%progbits
+ 220              		.align	1
+ 221              		.global	update_time
+ 222              		.syntax unified
+ 223              		.thumb
+ 224              		.thumb_func
+ 226              	update_time:
+ 227              	.LVL13:
+ 228              	.LFB6:
+  59:controller.c  **** 
+  60:controller.c  **** // return from time editing mode
+  61:controller.c  **** 
+  62:controller.c  **** void enter_main_state(controller_evt_t event) {
+  63:controller.c  ****     //disable minutes blink
+  64:controller.c  ****     digit_swapper_disable_blink(2);
+  65:controller.c  ****     digit_swapper_disable_blink(3);
+  66:controller.c  ****     //apply time
+  67:controller.c  ****     rtc_set_time(&editable_time);
+  68:controller.c  ****     current_state = STATE_MAIN;
+  69:controller.c  **** }
+  70:controller.c  **** 
+  71:controller.c  **** // update display time
+  72:controller.c  **** 
+  73:controller.c  **** void update_time(controller_evt_t event) {
+ 229              		.loc 1 73 42 is_stmt 1 view -0
+ 230              		.cfi_startproc
+ 231              		@ args = 0, pretend = 0, frame = 0
+ 232              		@ frame_needed = 0, uses_anonymous_args = 0
+ 233              		.loc 1 73 42 is_stmt 0 view .LVU43
+ 234 0000 10B5     		push	{r4, lr}
+ 235              	.LCFI3:
+ 236              		.cfi_def_cfa_offset 8
+ 237              		.cfi_offset 4, -8
+ 238              		.cfi_offset 14, -4
+  74:controller.c  ****     rtc_get_time(&editable_time);
+ 239              		.loc 1 74 5 is_stmt 1 view .LVU44
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 7
+
+
+ 240 0002 054C     		ldr	r4, .L20
+ 241 0004 2046     		mov	r0, r4
+ 242              	.LVL14:
+ 243              		.loc 1 74 5 is_stmt 0 view .LVU45
+ 244 0006 FFF7FEFF 		bl	rtc_get_time
+ 245              	.LVL15:
+  75:controller.c  ****     digit_swapper_set_time(&editable_time);
+ 246              		.loc 1 75 5 is_stmt 1 view .LVU46
+ 247 000a 2046     		mov	r0, r4
+ 248 000c FFF7FEFF 		bl	digit_swapper_set_time
+ 249              	.LVL16:
+  76:controller.c  ****     current_state = STATE_MAIN;
+ 250              		.loc 1 76 5 view .LVU47
+ 251              		.loc 1 76 19 is_stmt 0 view .LVU48
+ 252 0010 024B     		ldr	r3, .L20+4
+ 253 0012 0022     		movs	r2, #0
+ 254 0014 1A70     		strb	r2, [r3]
+  77:controller.c  **** }
+ 255              		.loc 1 77 1 view .LVU49
+ 256 0016 10BD     		pop	{r4, pc}
+ 257              	.L21:
+ 258              		.align	2
+ 259              	.L20:
+ 260 0018 00000000 		.word	.LANCHOR1
+ 261 001c 00000000 		.word	.LANCHOR0
+ 262              		.cfi_endproc
+ 263              	.LFE6:
+ 265              		.section	.text.enter_min_edit,"ax",%progbits
+ 266              		.align	1
+ 267              		.global	enter_min_edit
+ 268              		.syntax unified
+ 269              		.thumb
+ 270              		.thumb_func
+ 272              	enter_min_edit:
+ 273              	.LVL17:
+ 274              	.LFB1:
+  25:controller.c  ****     // disable hour digits blink
+ 275              		.loc 1 25 45 is_stmt 1 view -0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 0
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+  25:controller.c  ****     // disable hour digits blink
+ 279              		.loc 1 25 45 is_stmt 0 view .LVU51
+ 280 0000 08B5     		push	{r3, lr}
+ 281              	.LCFI4:
+ 282              		.cfi_def_cfa_offset 8
+ 283              		.cfi_offset 3, -8
+ 284              		.cfi_offset 14, -4
+  27:controller.c  ****     digit_swapper_disable_blink(1);
+ 285              		.loc 1 27 5 is_stmt 1 view .LVU52
+ 286 0002 0020     		movs	r0, #0
+ 287              	.LVL18:
+  27:controller.c  ****     digit_swapper_disable_blink(1);
+ 288              		.loc 1 27 5 is_stmt 0 view .LVU53
+ 289 0004 FFF7FEFF 		bl	digit_swapper_disable_blink
+ 290              	.LVL19:
+  28:controller.c  ****     // enable minute digits blink
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 8
+
+
+ 291              		.loc 1 28 5 is_stmt 1 view .LVU54
+ 292 0008 0120     		movs	r0, #1
+ 293 000a FFF7FEFF 		bl	digit_swapper_disable_blink
+ 294              	.LVL20:
+  30:controller.c  ****     digit_swapper_enable_blink(3);
+ 295              		.loc 1 30 5 view .LVU55
+ 296 000e 0220     		movs	r0, #2
+ 297 0010 FFF7FEFF 		bl	digit_swapper_enable_blink
+ 298              	.LVL21:
+  31:controller.c  ****     current_state = STATE_EDIT_MINUTES;
+ 299              		.loc 1 31 5 view .LVU56
+ 300 0014 0320     		movs	r0, #3
+ 301 0016 FFF7FEFF 		bl	digit_swapper_enable_blink
+ 302              	.LVL22:
+  32:controller.c  **** }
+ 303              		.loc 1 32 5 view .LVU57
+  32:controller.c  **** }
+ 304              		.loc 1 32 19 is_stmt 0 view .LVU58
+ 305 001a 024B     		ldr	r3, .L24
+ 306 001c 0222     		movs	r2, #2
+ 307 001e 1A70     		strb	r2, [r3]
+  33:controller.c  **** 
+ 308              		.loc 1 33 1 view .LVU59
+ 309 0020 08BD     		pop	{r3, pc}
+ 310              	.L25:
+ 311 0022 00BF     		.align	2
+ 312              	.L24:
+ 313 0024 00000000 		.word	.LANCHOR0
+ 314              		.cfi_endproc
+ 315              	.LFE1:
+ 317              		.section	.text.enter_main_state,"ax",%progbits
+ 318              		.align	1
+ 319              		.global	enter_main_state
+ 320              		.syntax unified
+ 321              		.thumb
+ 322              		.thumb_func
+ 324              	enter_main_state:
+ 325              	.LVL23:
+ 326              	.LFB5:
+  62:controller.c  ****     //disable minutes blink
+ 327              		.loc 1 62 47 is_stmt 1 view -0
+ 328              		.cfi_startproc
+ 329              		@ args = 0, pretend = 0, frame = 0
+ 330              		@ frame_needed = 0, uses_anonymous_args = 0
+  62:controller.c  ****     //disable minutes blink
+ 331              		.loc 1 62 47 is_stmt 0 view .LVU61
+ 332 0000 08B5     		push	{r3, lr}
+ 333              	.LCFI5:
+ 334              		.cfi_def_cfa_offset 8
+ 335              		.cfi_offset 3, -8
+ 336              		.cfi_offset 14, -4
+  64:controller.c  ****     digit_swapper_disable_blink(3);
+ 337              		.loc 1 64 5 is_stmt 1 view .LVU62
+ 338 0002 0220     		movs	r0, #2
+ 339              	.LVL24:
+  64:controller.c  ****     digit_swapper_disable_blink(3);
+ 340              		.loc 1 64 5 is_stmt 0 view .LVU63
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 9
+
+
+ 341 0004 FFF7FEFF 		bl	digit_swapper_disable_blink
+ 342              	.LVL25:
+  65:controller.c  ****     //apply time
+ 343              		.loc 1 65 5 is_stmt 1 view .LVU64
+ 344 0008 0320     		movs	r0, #3
+ 345 000a FFF7FEFF 		bl	digit_swapper_disable_blink
+ 346              	.LVL26:
+  67:controller.c  ****     current_state = STATE_MAIN;
+ 347              		.loc 1 67 5 view .LVU65
+ 348 000e 0348     		ldr	r0, .L28
+ 349 0010 FFF7FEFF 		bl	rtc_set_time
+ 350              	.LVL27:
+  68:controller.c  **** }
+ 351              		.loc 1 68 5 view .LVU66
+  68:controller.c  **** }
+ 352              		.loc 1 68 19 is_stmt 0 view .LVU67
+ 353 0014 024B     		ldr	r3, .L28+4
+ 354 0016 0022     		movs	r2, #0
+ 355 0018 1A70     		strb	r2, [r3]
+  69:controller.c  **** 
+ 356              		.loc 1 69 1 view .LVU68
+ 357 001a 08BD     		pop	{r3, pc}
+ 358              	.L29:
+ 359              		.align	2
+ 360              	.L28:
+ 361 001c 00000000 		.word	.LANCHOR1
+ 362 0020 00000000 		.word	.LANCHOR0
+ 363              		.cfi_endproc
+ 364              	.LFE5:
+ 366              		.section	.text.controller_init,"ax",%progbits
+ 367              		.align	1
+ 368              		.global	controller_init
+ 369              		.syntax unified
+ 370              		.thumb
+ 371              		.thumb_func
+ 373              	controller_init:
+ 374              	.LFB7:
+  78:controller.c  **** 
+  79:controller.c  **** // state machine table
+  80:controller.c  **** 
+  81:controller.c  ****                                             //  short press         long press          time upd   
+  82:controller.c  **** static const evt_callback_t callbacks[3][4] = {{&play_glitch,       &enter_hour_edit,   &update_tim
+  83:controller.c  ****                                                {&increase_hours,    &enter_min_edit,    NULL,      
+  84:controller.c  ****                                                {&increase_minutes,  &enter_main_state,  NULL,      
+  85:controller.c  **** };
+  86:controller.c  **** 
+  87:controller.c  **** //init controller
+  88:controller.c  **** 
+  89:controller.c  **** void controller_init(void) {
+ 375              		.loc 1 89 28 is_stmt 1 view -0
+ 376              		.cfi_startproc
+ 377              		@ args = 0, pretend = 0, frame = 0
+ 378              		@ frame_needed = 0, uses_anonymous_args = 0
+ 379              		@ link register save eliminated.
+  90:controller.c  ****     current_state = STATE_MAIN;
+ 380              		.loc 1 90 5 view .LVU70
+ 381              		.loc 1 90 19 is_stmt 0 view .LVU71
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 10
+
+
+ 382 0000 014B     		ldr	r3, .L31
+ 383 0002 0022     		movs	r2, #0
+ 384 0004 1A70     		strb	r2, [r3]
+  91:controller.c  **** }
+ 385              		.loc 1 91 1 view .LVU72
+ 386 0006 7047     		bx	lr
+ 387              	.L32:
+ 388              		.align	2
+ 389              	.L31:
+ 390 0008 00000000 		.word	.LANCHOR0
+ 391              		.cfi_endproc
+ 392              	.LFE7:
+ 394              		.section	.text.controller_set_state,"ax",%progbits
+ 395              		.align	1
+ 396              		.global	controller_set_state
+ 397              		.syntax unified
+ 398              		.thumb
+ 399              		.thumb_func
+ 401              	controller_set_state:
+ 402              	.LVL28:
+ 403              	.LFB8:
+  92:controller.c  **** 
+  93:controller.c  **** // handle upcoming event
+  94:controller.c  **** 
+  95:controller.c  **** void controller_set_state(controller_evt_t event) {
+ 404              		.loc 1 95 51 is_stmt 1 view -0
+ 405              		.cfi_startproc
+ 406              		@ args = 0, pretend = 0, frame = 0
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408              		.loc 1 95 51 is_stmt 0 view .LVU74
+ 409 0000 08B5     		push	{r3, lr}
+ 410              	.LCFI6:
+ 411              		.cfi_def_cfa_offset 8
+ 412              		.cfi_offset 3, -8
+ 413              		.cfi_offset 14, -4
+  96:controller.c  ****     if(callbacks[current_state][event] == NULL) return;
+ 414              		.loc 1 96 5 is_stmt 1 view .LVU75
+ 415              		.loc 1 96 32 is_stmt 0 view .LVU76
+ 416 0002 054B     		ldr	r3, .L36
+ 417 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 418 0006 00EB8303 		add	r3, r0, r3, lsl #2
+ 419 000a 044A     		ldr	r2, .L36+4
+ 420 000c 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 421              		.loc 1 96 7 view .LVU77
+ 422 0010 03B1     		cbz	r3, .L33
+  97:controller.c  ****     (*(callbacks[current_state][event]))(event);
+ 423              		.loc 1 97 5 is_stmt 1 view .LVU78
+ 424              		.loc 1 97 6 is_stmt 0 view .LVU79
+ 425 0012 9847     		blx	r3
+ 426              	.LVL29:
+ 427              	.L33:
+  98:controller.c  **** }...
+ 428              		.loc 1 98 1 view .LVU80
+ 429 0014 08BD     		pop	{r3, pc}
+ 430              	.L37:
+ 431 0016 00BF     		.align	2
+ 432              	.L36:
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 11
+
+
+ 433 0018 00000000 		.word	.LANCHOR0
+ 434 001c 00000000 		.word	.LANCHOR2
+ 435              		.cfi_endproc
+ 436              	.LFE8:
+ 438              		.global	current_state
+ 439              		.global	editable_time
+ 440              		.section	.bss.current_state,"aw",%nobits
+ 441              		.set	.LANCHOR0,. + 0
+ 444              	current_state:
+ 445 0000 00       		.space	1
+ 446              		.section	.bss.editable_time,"aw",%nobits
+ 447              		.align	2
+ 448              		.set	.LANCHOR1,. + 0
+ 451              	editable_time:
+ 452 0000 000000   		.space	3
+ 453              		.section	.rodata.callbacks,"a"
+ 454              		.align	2
+ 455              		.set	.LANCHOR2,. + 0
+ 458              	callbacks:
+ 459 0000 00000000 		.word	play_glitch
+ 460 0004 00000000 		.word	enter_hour_edit
+ 461 0008 00000000 		.word	update_time
+ 462 000c 00000000 		.word	play_glitch
+ 463 0010 00000000 		.word	increase_hours
+ 464 0014 00000000 		.word	enter_min_edit
+ 465 0018 00000000 		.word	0
+ 466 001c 00000000 		.word	0
+ 467 0020 00000000 		.word	increase_minutes
+ 468 0024 00000000 		.word	enter_main_state
+ 469 0028 00000000 		.word	0
+ 470 002c 00000000 		.word	0
+ 471              		.text
+ 472              	.Letext0:
+ 473              		.file 2 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_
+ 474              		.file 3 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 475              		.file 4 "controller.h"
+ 476              		.file 5 "rtc.h"
+ 477              		.file 6 "digit_swapper.h"
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 controller.c
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:18     .text.play_glitch:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:24     .text.play_glitch:0000000000000000 play_glitch
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:43     .text.play_glitch:0000000000000008 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:48     .text.enter_hour_edit:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:54     .text.enter_hour_edit:0000000000000000 enter_hour_edit
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:96     .text.enter_hour_edit:0000000000000024 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:102    .text.increase_hours:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:108    .text.increase_hours:0000000000000000 increase_hours
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:155    .text.increase_hours:0000000000000024 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:161    .text.increase_minutes:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:167    .text.increase_minutes:0000000000000000 increase_minutes
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:214    .text.increase_minutes:0000000000000024 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:220    .text.update_time:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:226    .text.update_time:0000000000000000 update_time
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:260    .text.update_time:0000000000000018 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:266    .text.enter_min_edit:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:272    .text.enter_min_edit:0000000000000000 enter_min_edit
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:313    .text.enter_min_edit:0000000000000024 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:318    .text.enter_main_state:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:324    .text.enter_main_state:0000000000000000 enter_main_state
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:361    .text.enter_main_state:000000000000001c $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:367    .text.controller_init:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:373    .text.controller_init:0000000000000000 controller_init
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:390    .text.controller_init:0000000000000008 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:395    .text.controller_set_state:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:401    .text.controller_set_state:0000000000000000 controller_set_state
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:433    .text.controller_set_state:0000000000000018 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:444    .bss.current_state:0000000000000000 current_state
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:451    .bss.editable_time:0000000000000000 editable_time
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:445    .bss.current_state:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:447    .bss.editable_time:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:454    .rodata.callbacks:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:458    .rodata.callbacks:0000000000000000 callbacks
+
+UNDEFINED SYMBOLS
+digit_swapper_enable_blink
+rtc_get_time
+digit_swapper_set_time
+digit_swapper_disable_blink
+rtc_set_time

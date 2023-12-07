@@ -1,0 +1,243 @@
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"dcdc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.dcdc_init,"ax",%progbits
+  18              		.align	1
+  19              		.global	dcdc_init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	dcdc_init:
+  25              	.LFB29:
+  26              		.file 1 "dcdc.c"
+   1:dcdc.c        **** #include "dcdc.h"
+   2:dcdc.c        **** #include "stm32f10x.h"
+   3:dcdc.c        **** 
+   4:dcdc.c        **** // init all dcdc peripherals
+   5:dcdc.c        **** 
+   6:dcdc.c        **** void dcdc_init(void) {
+  27              		.loc 1 6 22 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+   7:dcdc.c        ****     RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_TIM1EN | RCC_APB2ENR_AFIOEN;
+  32              		.loc 1 7 5 view .LVU1
+  33              		.loc 1 7 18 is_stmt 0 view .LVU2
+  34 0000 204A     		ldr	r2, .L2
+  35 0002 9369     		ldr	r3, [r2, #24]
+  36 0004 43F40063 		orr	r3, r3, #2048
+  37 0008 43F00503 		orr	r3, r3, #5
+  38 000c 9361     		str	r3, [r2, #24]
+   8:dcdc.c        ****     // PA11 - push-pull afio pwm pin
+   9:dcdc.c        **** 	GPIOA->CRH &= ~GPIO_CRH_CNF11;
+  39              		.loc 1 9 2 is_stmt 1 view .LVU3
+  40              		.loc 1 9 13 is_stmt 0 view .LVU4
+  41 000e 1E4B     		ldr	r3, .L2+4
+  42 0010 5A68     		ldr	r2, [r3, #4]
+  43 0012 22F44042 		bic	r2, r2, #49152
+  44 0016 5A60     		str	r2, [r3, #4]
+  10:dcdc.c        **** 	GPIOA->CRH |= GPIO_CRH_CNF11_1;
+  45              		.loc 1 10 2 is_stmt 1 view .LVU5
+  46              		.loc 1 10 13 is_stmt 0 view .LVU6
+  47 0018 5A68     		ldr	r2, [r3, #4]
+  48 001a 42F40042 		orr	r2, r2, #32768
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s 			page 2
+
+
+  49 001e 5A60     		str	r2, [r3, #4]
+  11:dcdc.c        **** 	GPIOA->CRH	&= ~GPIO_CRH_MODE11;
+  50              		.loc 1 11 2 is_stmt 1 view .LVU7
+  51              		.loc 1 11 13 is_stmt 0 view .LVU8
+  52 0020 5A68     		ldr	r2, [r3, #4]
+  53 0022 22F44052 		bic	r2, r2, #12288
+  54 0026 5A60     		str	r2, [r3, #4]
+  12:dcdc.c        **** 	GPIOA->CRH	|= GPIO_CRH_MODE11_1;
+  55              		.loc 1 12 2 is_stmt 1 view .LVU9
+  56              		.loc 1 12 13 is_stmt 0 view .LVU10
+  57 0028 5A68     		ldr	r2, [r3, #4]
+  58 002a 42F40052 		orr	r2, r2, #8192
+  59 002e 5A60     		str	r2, [r3, #4]
+  13:dcdc.c        **** 	
+  14:dcdc.c        **** 	// configure pwm timer
+  15:dcdc.c        **** 	// pwm prameters:
+  16:dcdc.c        **** 	// 	freq: 10 kHz
+  17:dcdc.c        **** 	//  duty: 42%
+  18:dcdc.c        **** 	TIM1->PSC = 2;
+  60              		.loc 1 18 2 is_stmt 1 view .LVU11
+  61              		.loc 1 18 12 is_stmt 0 view .LVU12
+  62 0030 03F51053 		add	r3, r3, #9216
+  63 0034 0222     		movs	r2, #2
+  64 0036 1A85     		strh	r2, [r3, #40]	@ movhi
+  19:dcdc.c        **** 	uint16_t arr = 2400;
+  65              		.loc 1 19 2 is_stmt 1 view .LVU13
+  66              	.LVL0:
+  20:dcdc.c        ****     TIM1->ARR = arr;	//2400
+  67              		.loc 1 20 5 view .LVU14
+  68              		.loc 1 20 15 is_stmt 0 view .LVU15
+  69 0038 4FF41662 		mov	r2, #2400
+  70 003c 9A85     		strh	r2, [r3, #44]	@ movhi
+  21:dcdc.c        **** 	TIM1->CCR4 = arr*1400/2400;	//1328
+  71              		.loc 1 21 2 is_stmt 1 view .LVU16
+  72              		.loc 1 21 13 is_stmt 0 view .LVU17
+  73 003e 4FF4AF62 		mov	r2, #1400
+  74 0042 A3F84020 		strh	r2, [r3, #64]	@ movhi
+  22:dcdc.c        **** 	TIM1->CCER |= TIM_CCER_CC4E | TIM_CCER_CC4P;
+  75              		.loc 1 22 2 is_stmt 1 view .LVU18
+  76              		.loc 1 22 13 is_stmt 0 view .LVU19
+  77 0046 1A8C     		ldrh	r2, [r3, #32]
+  78 0048 92B2     		uxth	r2, r2
+  79 004a 42F44052 		orr	r2, r2, #12288
+  80 004e 1A84     		strh	r2, [r3, #32]	@ movhi
+  23:dcdc.c        **** 	TIM1->BDTR |= TIM_BDTR_MOE;
+  81              		.loc 1 23 2 is_stmt 1 view .LVU20
+  82              		.loc 1 23 13 is_stmt 0 view .LVU21
+  83 0050 B3F84420 		ldrh	r2, [r3, #68]
+  84 0054 6FEA4242 		mvn	r2, r2, lsl #17
+  85 0058 6FEA5242 		mvn	r2, r2, lsr #17
+  86 005c 92B2     		uxth	r2, r2
+  87 005e A3F84420 		strh	r2, [r3, #68]	@ movhi
+  24:dcdc.c        ****     TIM1->CCMR2 = TIM_CCMR2_OC4M_2 | TIM_CCMR2_OC4M_1; 
+  88              		.loc 1 24 5 is_stmt 1 view .LVU22
+  89              		.loc 1 24 17 is_stmt 0 view .LVU23
+  90 0062 4FF4C042 		mov	r2, #24576
+  91 0066 9A83     		strh	r2, [r3, #28]	@ movhi
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s 			page 3
+
+
+  25:dcdc.c        **** 	TIM1->CR1 &= ~TIM_CR1_DIR;
+  92              		.loc 1 25 2 is_stmt 1 view .LVU24
+  93              		.loc 1 25 12 is_stmt 0 view .LVU25
+  94 0068 1A88     		ldrh	r2, [r3]
+  95 006a 92B2     		uxth	r2, r2
+  96 006c 22F01002 		bic	r2, r2, #16
+  97 0070 92B2     		uxth	r2, r2
+  98 0072 1A80     		strh	r2, [r3]	@ movhi
+  26:dcdc.c        **** 	TIM1->CR1 &= ~TIM_CR1_CMS;
+  99              		.loc 1 26 2 is_stmt 1 view .LVU26
+ 100              		.loc 1 26 12 is_stmt 0 view .LVU27
+ 101 0074 1A88     		ldrh	r2, [r3]
+ 102 0076 92B2     		uxth	r2, r2
+ 103 0078 22F06002 		bic	r2, r2, #96
+ 104 007c 92B2     		uxth	r2, r2
+ 105 007e 1A80     		strh	r2, [r3]	@ movhi
+  27:dcdc.c        **** 	
+  28:dcdc.c        **** }
+ 106              		.loc 1 28 1 view .LVU28
+ 107 0080 7047     		bx	lr
+ 108              	.L3:
+ 109 0082 00BF     		.align	2
+ 110              	.L2:
+ 111 0084 00100240 		.word	1073876992
+ 112 0088 00080140 		.word	1073809408
+ 113              		.cfi_endproc
+ 114              	.LFE29:
+ 116              		.section	.text.dcdc_start,"ax",%progbits
+ 117              		.align	1
+ 118              		.global	dcdc_start
+ 119              		.syntax unified
+ 120              		.thumb
+ 121              		.thumb_func
+ 123              	dcdc_start:
+ 124              	.LFB30:
+  29:dcdc.c        **** 
+  30:dcdc.c        **** // ennable pwm
+  31:dcdc.c        **** 
+  32:dcdc.c        **** void dcdc_start(void) {
+ 125              		.loc 1 32 23 is_stmt 1 view -0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129              		@ link register save eliminated.
+  33:dcdc.c        ****     TIM1->CR1 |= TIM_CR1_CEN;
+ 130              		.loc 1 33 5 view .LVU30
+ 131              		.loc 1 33 15 is_stmt 0 view .LVU31
+ 132 0000 034A     		ldr	r2, .L5
+ 133 0002 1388     		ldrh	r3, [r2]
+ 134 0004 9BB2     		uxth	r3, r3
+ 135 0006 43F00103 		orr	r3, r3, #1
+ 136 000a 1380     		strh	r3, [r2]	@ movhi
+  34:dcdc.c        **** }
+ 137              		.loc 1 34 1 view .LVU32
+ 138 000c 7047     		bx	lr
+ 139              	.L6:
+ 140 000e 00BF     		.align	2
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s 			page 4
+
+
+ 141              	.L5:
+ 142 0010 002C0140 		.word	1073818624
+ 143              		.cfi_endproc
+ 144              	.LFE30:
+ 146              		.section	.text.dcdc_stop,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	dcdc_stop
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	dcdc_stop:
+ 154              	.LFB31:
+  35:dcdc.c        **** 
+  36:dcdc.c        **** // disable pwm
+  37:dcdc.c        **** 
+  38:dcdc.c        **** void dcdc_stop(void) {
+ 155              		.loc 1 38 22 is_stmt 1 view -0
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 0
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159              		@ link register save eliminated.
+  39:dcdc.c        ****     TIM1->CR1 &= ~TIM_CR1_CEN;
+ 160              		.loc 1 39 5 view .LVU34
+ 161              		.loc 1 39 15 is_stmt 0 view .LVU35
+ 162 0000 034A     		ldr	r2, .L8
+ 163 0002 1388     		ldrh	r3, [r2]
+ 164 0004 9BB2     		uxth	r3, r3
+ 165 0006 23F00103 		bic	r3, r3, #1
+ 166 000a 9BB2     		uxth	r3, r3
+ 167 000c 1380     		strh	r3, [r2]	@ movhi
+  40:dcdc.c        **** }...
+ 168              		.loc 1 40 1 view .LVU36
+ 169 000e 7047     		bx	lr
+ 170              	.L9:
+ 171              		.align	2
+ 172              	.L8:
+ 173 0010 002C0140 		.word	1073818624
+ 174              		.cfi_endproc
+ 175              	.LFE31:
+ 177              		.text
+ 178              	.Letext0:
+ 179              		.file 2 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_
+ 180              		.file 3 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 181              		.file 4 "CMSIS/Inc/stm32f10x.h"
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 dcdc.c
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s:18     .text.dcdc_init:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s:24     .text.dcdc_init:0000000000000000 dcdc_init
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s:111    .text.dcdc_init:0000000000000084 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s:117    .text.dcdc_start:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s:123    .text.dcdc_start:0000000000000000 dcdc_start
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s:142    .text.dcdc_start:0000000000000010 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s:147    .text.dcdc_stop:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s:153    .text.dcdc_stop:0000000000000000 dcdc_stop
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccCI8lJx.s:173    .text.dcdc_stop:0000000000000010 $d
+
+NO UNDEFINED SYMBOLS

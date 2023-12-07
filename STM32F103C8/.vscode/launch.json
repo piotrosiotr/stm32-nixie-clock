@@ -1,0 +1,25 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "OpenOCD",
+			"cwd": "${workspaceRoot}",
+			//path to your executable in a build folder (set it in a Makefile)
+			"executable": "./build/blinky.elf",
+			//path to a svd file that describes registers of MCU
+			"svdFile": "CMSIS/STM32F103xx.svd",
+			"request": "launch",
+			"showDevDebugOutput":"parsed",
+			"type": "cortex-debug",
+			"servertype": "openocd",
+			"device": "Cortex-M3",
+			"interface": "swd",
+			"configFiles": [
+				//path to openocd debugger config file
+				"/usr/local/Cellar/open-ocd/0.11.0/share/openocd/scripts/interface/stlink-v2.cfg",
+				//path to openocd target config file
+				"/usr/local/Cellar/open-ocd/0.11.0/share/openocd/scripts/target/stm32f1x.cfg"
+			]
+		}
+	]
+}

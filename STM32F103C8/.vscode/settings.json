@@ -1,0 +1,10 @@
+{
+	"cortex-debug.enableTelemetry": false,
+	//path to compiler execcutable
+	"cortex-debug.armToolchainPath": "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin",
+	//path to openocd executable
+	"cortex-debug.openocdPath": "/usr/local/Cellar/open-ocd/0.11.0/bin/openocd",
+	"files.associations": {
+		"cstdio": "c"
+	}
+}
