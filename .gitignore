@@ -53,3 +53,5 @@ Mkfile.old
 dkms.conf
 *.bin
 *.lst
+build
+.DS_Store
