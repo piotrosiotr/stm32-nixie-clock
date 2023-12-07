@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -17,15 +17,16 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              		.section	.text.rtc_init,"ax",%progbits
+  17              		.section	.text.rtc_get_time,"ax",%progbits
   18              		.align	1
-  19              		.global	rtc_init
+  19              		.global	rtc_get_time
   20              		.syntax unified
   21              		.thumb
   22              		.thumb_func
-  24              	rtc_init:
-  25              	.LFB29:
-  26              		.file 1 "rtc.c"
+  24              	rtc_get_time:
+  25              	.LVL0:
+  26              	.LFB30:
+  27              		.file 1 "rtc.c"
    1:rtc.c         **** #include "rtc.h"
    2:rtc.c         **** #include "stm32f10x.h"
    3:rtc.c         **** #include "controller.h"
@@ -34,123 +35,338 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
    6:rtc.c         **** time_t sys_time;
    7:rtc.c         **** 
    8:rtc.c         **** void rtc_init(void) {
-  27              		.loc 1 8 21 view -0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
    9:rtc.c         ****     // enable rtc (check reference manual)
   10:rtc.c         ****     RCC->APB1ENR |= RCC_APB1ENR_PWREN | RCC_APB1ENR_BKPEN; 
-  32              		.loc 1 10 5 view .LVU1
-  33              		.loc 1 10 18 is_stmt 0 view .LVU2
-  34 0000 2E4B     		ldr	r3, .L6
-  35 0002 DA69     		ldr	r2, [r3, #28]
-  36 0004 42F0C052 		orr	r2, r2, #402653184
-  37 0008 DA61     		str	r2, [r3, #28]
   11:rtc.c         ****     PWR->CR |= PWR_CR_DBP; 
-  38              		.loc 1 11 5 is_stmt 1 view .LVU3
-  39              		.loc 1 11 13 is_stmt 0 view .LVU4
-  40 000a 2D49     		ldr	r1, .L6+4
-  41 000c 0A68     		ldr	r2, [r1]
-  42 000e 42F48072 		orr	r2, r2, #256
-  43 0012 0A60     		str	r2, [r1]
-  12:rtc.c         ****     //if ((RCC->BDCR & RCC_BDCR_RTCEN) != RCC_BDCR_RTCEN)
-  13:rtc.c         ****     //{
+  12:rtc.c         ****     if ((RCC->BDCR & RCC_BDCR_RTCEN) != RCC_BDCR_RTCEN)
+  13:rtc.c         ****     {
   14:rtc.c         ****         RCC->BDCR |= RCC_BDCR_BDRST;  
-  44              		.loc 1 14 9 is_stmt 1 view .LVU5
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 2
-
-
-  45              		.loc 1 14 19 is_stmt 0 view .LVU6
-  46 0014 1A6A     		ldr	r2, [r3, #32]
-  47 0016 42F48032 		orr	r2, r2, #65536
-  48 001a 1A62     		str	r2, [r3, #32]
   15:rtc.c         ****         RCC->BDCR &= ~RCC_BDCR_BDRST;
-  49              		.loc 1 15 9 is_stmt 1 view .LVU7
-  50              		.loc 1 15 19 is_stmt 0 view .LVU8
-  51 001c 1A6A     		ldr	r2, [r3, #32]
-  52 001e 22F48032 		bic	r2, r2, #65536
-  53 0022 1A62     		str	r2, [r3, #32]
   16:rtc.c         ****         RCC->BDCR |= RCC_BDCR_RTCSEL_LSE;     
-  54              		.loc 1 16 9 is_stmt 1 view .LVU9
-  55              		.loc 1 16 19 is_stmt 0 view .LVU10
-  56 0024 1A6A     		ldr	r2, [r3, #32]
-  57 0026 42F48072 		orr	r2, r2, #256
-  58 002a 1A62     		str	r2, [r3, #32]
   17:rtc.c         ****         RCC->BDCR |= RCC_BDCR_LSEON;        
-  59              		.loc 1 17 9 is_stmt 1 view .LVU11
-  60              		.loc 1 17 19 is_stmt 0 view .LVU12
-  61 002c 1A6A     		ldr	r2, [r3, #32]
-  62 002e 42F00102 		orr	r2, r2, #1
-  63 0032 1A62     		str	r2, [r3, #32]
   18:rtc.c         ****         while ((RCC->BDCR & RCC_BDCR_LSEON) != RCC_BDCR_LSEON); 
-  64              		.loc 1 18 9 is_stmt 1 view .LVU13
-  65              	.L2:
-  66              		.loc 1 18 63 discriminator 1 view .LVU14
-  67              		.loc 1 18 15 discriminator 1 view .LVU15
-  68              		.loc 1 18 20 is_stmt 0 discriminator 1 view .LVU16
-  69 0034 214B     		ldr	r3, .L6
-  70 0036 1B6A     		ldr	r3, [r3, #32]
-  71              		.loc 1 18 15 discriminator 1 view .LVU17
-  72 0038 13F0010F 		tst	r3, #1
-  73 003c FAD0     		beq	.L2
   19:rtc.c         ****         RCC->BDCR |= RCC_BDCR_RTCEN;         
-  74              		.loc 1 19 9 is_stmt 1 view .LVU18
-  75              		.loc 1 19 19 is_stmt 0 view .LVU19
-  76 003e 1F4A     		ldr	r2, .L6
-  77 0040 136A     		ldr	r3, [r2, #32]
-  78 0042 43F40043 		orr	r3, r3, #32768
-  79 0046 1362     		str	r3, [r2, #32]
   20:rtc.c         ****         // enter configuration mode
   21:rtc.c         ****         while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
-  80              		.loc 1 21 9 is_stmt 1 view .LVU20
-  81              	.L3:
-  82              		.loc 1 21 60 discriminator 1 view .LVU21
-  83              		.loc 1 21 15 discriminator 1 view .LVU22
-  84              		.loc 1 21 20 is_stmt 0 discriminator 1 view .LVU23
-  85 0048 1E4B     		ldr	r3, .L6+8
-  86 004a 9B88     		ldrh	r3, [r3, #4]
-  87              		.loc 1 21 15 discriminator 1 view .LVU24
-  88 004c 13F0200F 		tst	r3, #32
-  89 0050 FAD0     		beq	.L3
   22:rtc.c         ****         RTC->CRL |= RTC_CRL_CNF;            
-  90              		.loc 1 22 9 is_stmt 1 view .LVU25
-  91              		.loc 1 22 18 is_stmt 0 view .LVU26
-  92 0052 1C4B     		ldr	r3, .L6+8
-  93 0054 9A88     		ldrh	r2, [r3, #4]
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 3
+  23:rtc.c         ****         RTC->PRLL = 0x7FFF;  
+  24:rtc.c         ****         // exit rtc configuration mode
+  25:rtc.c         ****         RTC->CRL &= ~RTC_CRL_CNF;      
+  26:rtc.c         ****         while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+  27:rtc.c         ****     }
+  28:rtc.c         ****     RTC->CRL &= (uint16_t) ~RTC_CRL_RSF;
+  29:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RSF) != RTC_CRL_RSF);
+  30:rtc.c         **** 
+  31:rtc.c         ****     // enter configuration mode
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 2
 
 
-  94 0056 92B2     		uxth	r2, r2
-  95 0058 42F01002 		orr	r2, r2, #16
-  96 005c 9A80     		strh	r2, [r3, #4]	@ movhi
-  23:rtc.c         ****         RTC->CRL &= ~RTC_CRL_SECF;
-  97              		.loc 1 23 9 is_stmt 1 view .LVU27
-  98              		.loc 1 23 18 is_stmt 0 view .LVU28
-  99 005e 9A88     		ldrh	r2, [r3, #4]
- 100 0060 92B2     		uxth	r2, r2
- 101 0062 22F00102 		bic	r2, r2, #1
- 102 0066 92B2     		uxth	r2, r2
- 103 0068 9A80     		strh	r2, [r3, #4]	@ movhi
-  24:rtc.c         ****         RTC->PRLL = 0x7FFF;  
- 104              		.loc 1 24 9 is_stmt 1 view .LVU29
- 105              		.loc 1 24 19 is_stmt 0 view .LVU30
- 106 006a 47F6FF72 		movw	r2, #32767
- 107 006e 9A81     		strh	r2, [r3, #12]	@ movhi
-  25:rtc.c         ****         // enable rtc second interrupt               
-  26:rtc.c         ****         RTC->CRH |= RTC_CRH_SECIE;
- 108              		.loc 1 26 9 is_stmt 1 view .LVU31
- 109              		.loc 1 26 18 is_stmt 0 view .LVU32
- 110 0070 1A88     		ldrh	r2, [r3]
- 111 0072 92B2     		uxth	r2, r2
- 112 0074 42F00102 		orr	r2, r2, #1
- 113 0078 1A80     		strh	r2, [r3]	@ movhi
-  27:rtc.c         ****         NVIC_EnableIRQ(RTC_IRQn); 
- 114              		.loc 1 27 9 is_stmt 1 view .LVU33
- 115              	.LVL0:
- 116              	.LBB4:
- 117              	.LBI4:
- 118              		.file 2 "CMSIS/Inc/core_cm3.h"
+  32:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+  33:rtc.c         ****     RTC->CRL |= RTC_CRL_CNF;            
+  34:rtc.c         ****     RTC->CRL &= ~RTC_CRL_SECF;
+  35:rtc.c         ****     // enable rtc second interrupt               
+  36:rtc.c         ****     RTC->CRH |= RTC_CRH_SECIE;
+  37:rtc.c         ****     NVIC_EnableIRQ(RTC_IRQn); 
+  38:rtc.c         ****     // exit rtc configuration mode
+  39:rtc.c         ****     RTC->CRL &= ~RTC_CRL_CNF;      
+  40:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+  41:rtc.c         ****     
+  42:rtc.c         ****     rtc_get_time(&sys_time);
+  43:rtc.c         **** }
+  44:rtc.c         **** 
+  45:rtc.c         **** // get system time from rtc module
+  46:rtc.c         **** 
+  47:rtc.c         **** void rtc_get_time(time_t *t) {
+  28              		.loc 1 47 30 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  48:rtc.c         ****     uint32_t time_var = (RTC->CNTH<<16)|RTC->CNTL;
+  33              		.loc 1 48 5 view .LVU1
+  34              		.loc 1 48 29 is_stmt 0 view .LVU2
+  35 0000 0F4A     		ldr	r2, .L2
+  36 0002 118B     		ldrh	r1, [r2, #24]
+  37              		.loc 1 48 44 view .LVU3
+  38 0004 938B     		ldrh	r3, [r2, #28]
+  39 0006 9BB2     		uxth	r3, r3
+  40              		.loc 1 48 40 view .LVU4
+  41 0008 43EA0143 		orr	r3, r3, r1, lsl #16
+  42              	.LVL1:
+  49:rtc.c         ****     t->hours = time_var/3600;
+  43              		.loc 1 49 5 is_stmt 1 view .LVU5
+  44              		.loc 1 49 24 is_stmt 0 view .LVU6
+  45 000c 02F1A342 		add	r2, r2, #1367343104
+  46 0010 02F50A12 		add	r2, r2, #2260992
+  47 0014 02F6C532 		addw	r2, r2, #3013
+  48 0018 A2FB0312 		umull	r1, r2, r2, r3
+  49 001c D20A     		lsrs	r2, r2, #11
+  50              		.loc 1 49 14 view .LVU7
+  51 001e 0270     		strb	r2, [r0]
+  50:rtc.c         ****     t->minutes = (time_var%3600)/60;
+  52              		.loc 1 50 5 is_stmt 1 view .LVU8
+  53              		.loc 1 50 27 is_stmt 0 view .LVU9
+  54 0020 4FF46161 		mov	r1, #3600
+  55 0024 01FB1233 		mls	r3, r1, r2, r3
+  56              	.LVL2:
+  57              		.loc 1 50 33 view .LVU10
+  58 0028 064A     		ldr	r2, .L2+4
+  59 002a A2FB0312 		umull	r1, r2, r2, r3
+  60 002e 5209     		lsrs	r2, r2, #5
+  61              		.loc 1 50 16 view .LVU11
+  62 0030 4270     		strb	r2, [r0, #1]
+  51:rtc.c         ****     t->seconds = (time_var%3600)%60;
+  63              		.loc 1 51 5 is_stmt 1 view .LVU12
+  64              		.loc 1 51 33 is_stmt 0 view .LVU13
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 3
+
+
+  65 0032 C2EB0212 		rsb	r2, r2, r2, lsl #4
+  66 0036 A3EB8203 		sub	r3, r3, r2, lsl #2
+  67              		.loc 1 51 16 view .LVU14
+  68 003a 8370     		strb	r3, [r0, #2]
+  52:rtc.c         **** }
+  69              		.loc 1 52 1 view .LVU15
+  70 003c 7047     		bx	lr
+  71              	.L3:
+  72 003e 00BF     		.align	2
+  73              	.L2:
+  74 0040 00280040 		.word	1073752064
+  75 0044 89888888 		.word	-2004318071
+  76              		.cfi_endproc
+  77              	.LFE30:
+  79              		.section	.text.rtc_init,"ax",%progbits
+  80              		.align	1
+  81              		.global	rtc_init
+  82              		.syntax unified
+  83              		.thumb
+  84              		.thumb_func
+  86              	rtc_init:
+  87              	.LFB29:
+   8:rtc.c         ****     // enable rtc (check reference manual)
+  88              		.loc 1 8 21 is_stmt 1 view -0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92 0000 08B5     		push	{r3, lr}
+  93              	.LCFI0:
+  94              		.cfi_def_cfa_offset 8
+  95              		.cfi_offset 3, -8
+  96              		.cfi_offset 14, -4
+  10:rtc.c         ****     PWR->CR |= PWR_CR_DBP; 
+  97              		.loc 1 10 5 view .LVU17
+  10:rtc.c         ****     PWR->CR |= PWR_CR_DBP; 
+  98              		.loc 1 10 18 is_stmt 0 view .LVU18
+  99 0002 3B4B     		ldr	r3, .L13
+ 100 0004 DA69     		ldr	r2, [r3, #28]
+ 101 0006 42F0C052 		orr	r2, r2, #402653184
+ 102 000a DA61     		str	r2, [r3, #28]
+  11:rtc.c         ****     if ((RCC->BDCR & RCC_BDCR_RTCEN) != RCC_BDCR_RTCEN)
+ 103              		.loc 1 11 5 is_stmt 1 view .LVU19
+  11:rtc.c         ****     if ((RCC->BDCR & RCC_BDCR_RTCEN) != RCC_BDCR_RTCEN)
+ 104              		.loc 1 11 13 is_stmt 0 view .LVU20
+ 105 000c 3949     		ldr	r1, .L13+4
+ 106 000e 0A68     		ldr	r2, [r1]
+ 107 0010 42F48072 		orr	r2, r2, #256
+ 108 0014 0A60     		str	r2, [r1]
+  12:rtc.c         ****     {
+ 109              		.loc 1 12 5 is_stmt 1 view .LVU21
+  12:rtc.c         ****     {
+ 110              		.loc 1 12 13 is_stmt 0 view .LVU22
+ 111 0016 1B6A     		ldr	r3, [r3, #32]
+  12:rtc.c         ****     {
+ 112              		.loc 1 12 8 view .LVU23
+ 113 0018 13F4004F 		tst	r3, #32768
+ 114 001c 33D1     		bne	.L5
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 4
+
+
+  14:rtc.c         ****         RCC->BDCR &= ~RCC_BDCR_BDRST;
+ 115              		.loc 1 14 9 is_stmt 1 view .LVU24
+  14:rtc.c         ****         RCC->BDCR &= ~RCC_BDCR_BDRST;
+ 116              		.loc 1 14 19 is_stmt 0 view .LVU25
+ 117 001e 344B     		ldr	r3, .L13
+ 118 0020 1A6A     		ldr	r2, [r3, #32]
+ 119 0022 42F48032 		orr	r2, r2, #65536
+ 120 0026 1A62     		str	r2, [r3, #32]
+  15:rtc.c         ****         RCC->BDCR |= RCC_BDCR_RTCSEL_LSE;     
+ 121              		.loc 1 15 9 is_stmt 1 view .LVU26
+  15:rtc.c         ****         RCC->BDCR |= RCC_BDCR_RTCSEL_LSE;     
+ 122              		.loc 1 15 19 is_stmt 0 view .LVU27
+ 123 0028 1A6A     		ldr	r2, [r3, #32]
+ 124 002a 22F48032 		bic	r2, r2, #65536
+ 125 002e 1A62     		str	r2, [r3, #32]
+  16:rtc.c         ****         RCC->BDCR |= RCC_BDCR_LSEON;        
+ 126              		.loc 1 16 9 is_stmt 1 view .LVU28
+  16:rtc.c         ****         RCC->BDCR |= RCC_BDCR_LSEON;        
+ 127              		.loc 1 16 19 is_stmt 0 view .LVU29
+ 128 0030 1A6A     		ldr	r2, [r3, #32]
+ 129 0032 42F48072 		orr	r2, r2, #256
+ 130 0036 1A62     		str	r2, [r3, #32]
+  17:rtc.c         ****         while ((RCC->BDCR & RCC_BDCR_LSEON) != RCC_BDCR_LSEON); 
+ 131              		.loc 1 17 9 is_stmt 1 view .LVU30
+  17:rtc.c         ****         while ((RCC->BDCR & RCC_BDCR_LSEON) != RCC_BDCR_LSEON); 
+ 132              		.loc 1 17 19 is_stmt 0 view .LVU31
+ 133 0038 1A6A     		ldr	r2, [r3, #32]
+ 134 003a 42F00102 		orr	r2, r2, #1
+ 135 003e 1A62     		str	r2, [r3, #32]
+  18:rtc.c         ****         RCC->BDCR |= RCC_BDCR_RTCEN;         
+ 136              		.loc 1 18 9 is_stmt 1 view .LVU32
+ 137              	.L6:
+  18:rtc.c         ****         RCC->BDCR |= RCC_BDCR_RTCEN;         
+ 138              		.loc 1 18 63 discriminator 1 view .LVU33
+  18:rtc.c         ****         RCC->BDCR |= RCC_BDCR_RTCEN;         
+ 139              		.loc 1 18 15 discriminator 1 view .LVU34
+  18:rtc.c         ****         RCC->BDCR |= RCC_BDCR_RTCEN;         
+ 140              		.loc 1 18 20 is_stmt 0 discriminator 1 view .LVU35
+ 141 0040 2B4B     		ldr	r3, .L13
+ 142 0042 1B6A     		ldr	r3, [r3, #32]
+  18:rtc.c         ****         RCC->BDCR |= RCC_BDCR_RTCEN;         
+ 143              		.loc 1 18 15 discriminator 1 view .LVU36
+ 144 0044 13F0010F 		tst	r3, #1
+ 145 0048 FAD0     		beq	.L6
+  19:rtc.c         ****         // enter configuration mode
+ 146              		.loc 1 19 9 is_stmt 1 view .LVU37
+  19:rtc.c         ****         // enter configuration mode
+ 147              		.loc 1 19 19 is_stmt 0 view .LVU38
+ 148 004a 294A     		ldr	r2, .L13
+ 149 004c 136A     		ldr	r3, [r2, #32]
+ 150 004e 43F40043 		orr	r3, r3, #32768
+ 151 0052 1362     		str	r3, [r2, #32]
+  21:rtc.c         ****         RTC->CRL |= RTC_CRL_CNF;            
+ 152              		.loc 1 21 9 is_stmt 1 view .LVU39
+ 153              	.L7:
+  21:rtc.c         ****         RTC->CRL |= RTC_CRL_CNF;            
+ 154              		.loc 1 21 60 discriminator 1 view .LVU40
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 5
+
+
+  21:rtc.c         ****         RTC->CRL |= RTC_CRL_CNF;            
+ 155              		.loc 1 21 15 discriminator 1 view .LVU41
+  21:rtc.c         ****         RTC->CRL |= RTC_CRL_CNF;            
+ 156              		.loc 1 21 20 is_stmt 0 discriminator 1 view .LVU42
+ 157 0054 284B     		ldr	r3, .L13+8
+ 158 0056 9B88     		ldrh	r3, [r3, #4]
+  21:rtc.c         ****         RTC->CRL |= RTC_CRL_CNF;            
+ 159              		.loc 1 21 15 discriminator 1 view .LVU43
+ 160 0058 13F0200F 		tst	r3, #32
+ 161 005c FAD0     		beq	.L7
+  22:rtc.c         ****         RTC->PRLL = 0x7FFF;  
+ 162              		.loc 1 22 9 is_stmt 1 view .LVU44
+  22:rtc.c         ****         RTC->PRLL = 0x7FFF;  
+ 163              		.loc 1 22 18 is_stmt 0 view .LVU45
+ 164 005e 264A     		ldr	r2, .L13+8
+ 165 0060 9388     		ldrh	r3, [r2, #4]
+ 166 0062 9BB2     		uxth	r3, r3
+ 167 0064 43F01003 		orr	r3, r3, #16
+ 168 0068 9380     		strh	r3, [r2, #4]	@ movhi
+  23:rtc.c         ****         // exit rtc configuration mode
+ 169              		.loc 1 23 9 is_stmt 1 view .LVU46
+  23:rtc.c         ****         // exit rtc configuration mode
+ 170              		.loc 1 23 19 is_stmt 0 view .LVU47
+ 171 006a 47F6FF73 		movw	r3, #32767
+ 172 006e 9381     		strh	r3, [r2, #12]	@ movhi
+  25:rtc.c         ****         while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+ 173              		.loc 1 25 9 is_stmt 1 view .LVU48
+  25:rtc.c         ****         while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+ 174              		.loc 1 25 18 is_stmt 0 view .LVU49
+ 175 0070 9388     		ldrh	r3, [r2, #4]
+ 176 0072 9BB2     		uxth	r3, r3
+ 177 0074 23F01003 		bic	r3, r3, #16
+ 178 0078 9BB2     		uxth	r3, r3
+ 179 007a 9380     		strh	r3, [r2, #4]	@ movhi
+  26:rtc.c         ****     }
+ 180              		.loc 1 26 9 is_stmt 1 view .LVU50
+ 181              	.L8:
+  26:rtc.c         ****     }
+ 182              		.loc 1 26 60 discriminator 1 view .LVU51
+  26:rtc.c         ****     }
+ 183              		.loc 1 26 15 discriminator 1 view .LVU52
+  26:rtc.c         ****     }
+ 184              		.loc 1 26 20 is_stmt 0 discriminator 1 view .LVU53
+ 185 007c 1E4B     		ldr	r3, .L13+8
+ 186 007e 9B88     		ldrh	r3, [r3, #4]
+  26:rtc.c         ****     }
+ 187              		.loc 1 26 15 discriminator 1 view .LVU54
+ 188 0080 13F0200F 		tst	r3, #32
+ 189 0084 FAD0     		beq	.L8
+ 190              	.L5:
+  28:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RSF) != RTC_CRL_RSF);
+ 191              		.loc 1 28 5 is_stmt 1 view .LVU55
+  28:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RSF) != RTC_CRL_RSF);
+ 192              		.loc 1 28 14 is_stmt 0 view .LVU56
+ 193 0086 1C4A     		ldr	r2, .L13+8
+ 194 0088 9388     		ldrh	r3, [r2, #4]
+ 195 008a 9BB2     		uxth	r3, r3
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 6
+
+
+ 196 008c 23F00803 		bic	r3, r3, #8
+ 197 0090 9BB2     		uxth	r3, r3
+ 198 0092 9380     		strh	r3, [r2, #4]	@ movhi
+  29:rtc.c         **** 
+ 199              		.loc 1 29 5 is_stmt 1 view .LVU57
+ 200              	.L9:
+  29:rtc.c         **** 
+ 201              		.loc 1 29 52 discriminator 1 view .LVU58
+  29:rtc.c         **** 
+ 202              		.loc 1 29 11 discriminator 1 view .LVU59
+  29:rtc.c         **** 
+ 203              		.loc 1 29 16 is_stmt 0 discriminator 1 view .LVU60
+ 204 0094 184B     		ldr	r3, .L13+8
+ 205 0096 9B88     		ldrh	r3, [r3, #4]
+  29:rtc.c         **** 
+ 206              		.loc 1 29 11 discriminator 1 view .LVU61
+ 207 0098 13F0080F 		tst	r3, #8
+ 208 009c FAD0     		beq	.L9
+ 209              	.L10:
+  32:rtc.c         ****     RTC->CRL |= RTC_CRL_CNF;            
+ 210              		.loc 1 32 56 is_stmt 1 discriminator 1 view .LVU62
+  32:rtc.c         ****     RTC->CRL |= RTC_CRL_CNF;            
+ 211              		.loc 1 32 11 discriminator 1 view .LVU63
+  32:rtc.c         ****     RTC->CRL |= RTC_CRL_CNF;            
+ 212              		.loc 1 32 16 is_stmt 0 discriminator 1 view .LVU64
+ 213 009e 164B     		ldr	r3, .L13+8
+ 214 00a0 9B88     		ldrh	r3, [r3, #4]
+  32:rtc.c         ****     RTC->CRL |= RTC_CRL_CNF;            
+ 215              		.loc 1 32 11 discriminator 1 view .LVU65
+ 216 00a2 13F0200F 		tst	r3, #32
+ 217 00a6 FAD0     		beq	.L10
+  33:rtc.c         ****     RTC->CRL &= ~RTC_CRL_SECF;
+ 218              		.loc 1 33 5 is_stmt 1 view .LVU66
+  33:rtc.c         ****     RTC->CRL &= ~RTC_CRL_SECF;
+ 219              		.loc 1 33 14 is_stmt 0 view .LVU67
+ 220 00a8 134B     		ldr	r3, .L13+8
+ 221 00aa 9A88     		ldrh	r2, [r3, #4]
+ 222 00ac 92B2     		uxth	r2, r2
+ 223 00ae 42F01002 		orr	r2, r2, #16
+ 224 00b2 9A80     		strh	r2, [r3, #4]	@ movhi
+  34:rtc.c         ****     // enable rtc second interrupt               
+ 225              		.loc 1 34 5 is_stmt 1 view .LVU68
+  34:rtc.c         ****     // enable rtc second interrupt               
+ 226              		.loc 1 34 14 is_stmt 0 view .LVU69
+ 227 00b4 9A88     		ldrh	r2, [r3, #4]
+ 228 00b6 92B2     		uxth	r2, r2
+ 229 00b8 22F00102 		bic	r2, r2, #1
+ 230 00bc 92B2     		uxth	r2, r2
+ 231 00be 9A80     		strh	r2, [r3, #4]	@ movhi
+  36:rtc.c         ****     NVIC_EnableIRQ(RTC_IRQn); 
+ 232              		.loc 1 36 5 is_stmt 1 view .LVU70
+  36:rtc.c         ****     NVIC_EnableIRQ(RTC_IRQn); 
+ 233              		.loc 1 36 14 is_stmt 0 view .LVU71
+ 234 00c0 1A88     		ldrh	r2, [r3]
+ 235 00c2 92B2     		uxth	r2, r2
+ 236 00c4 42F00102 		orr	r2, r2, #1
+ 237 00c8 1A80     		strh	r2, [r3]	@ movhi
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 7
+
+
+  37:rtc.c         ****     // exit rtc configuration mode
+ 238              		.loc 1 37 5 is_stmt 1 view .LVU72
+ 239              	.LVL3:
+ 240              	.LBB4:
+ 241              	.LBI4:
+ 242              		.file 2 "CMSIS/Inc/core_cm3.h"
    1:CMSIS/Inc/core_cm3.h **** /**************************************************************************//**
    2:CMSIS/Inc/core_cm3.h ****  * @file     core_cm3.h
    3:CMSIS/Inc/core_cm3.h ****  * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File
@@ -178,9 +394,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
   25:CMSIS/Inc/core_cm3.h **** #define __CM3_CORE_H__
   26:CMSIS/Inc/core_cm3.h **** 
   27:CMSIS/Inc/core_cm3.h **** /** @addtogroup CMSIS_CM3_core_LintCinfiguration CMSIS CM3 Core Lint Configuration
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 4
-
-
   28:CMSIS/Inc/core_cm3.h ****  *
   29:CMSIS/Inc/core_cm3.h ****  * List of Lint messages which will be suppressed and not shown:
   30:CMSIS/Inc/core_cm3.h ****  *   - Error 10: \n
@@ -205,6 +418,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
   49:CMSIS/Inc/core_cm3.h ****  * .
   50:CMSIS/Inc/core_cm3.h ****  *   - Error 528: \n
   51:CMSIS/Inc/core_cm3.h ****  *     static __INLINE void NVIC_DisableIRQ(uint32_t IRQn) \n
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 8
+
+
   52:CMSIS/Inc/core_cm3.h ****  *     Warning 528: Symbol 'NVIC_DisableIRQ(unsigned int)' (line 419, file ./cm3_core.h) not refere
   53:CMSIS/Inc/core_cm3.h ****  * .
   54:CMSIS/Inc/core_cm3.h ****  *   - Error 751: \n
@@ -238,9 +454,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
   82:CMSIS/Inc/core_cm3.h **** #endif 
   83:CMSIS/Inc/core_cm3.h **** 
   84:CMSIS/Inc/core_cm3.h **** #define __CM3_CMSIS_VERSION_MAIN  (0x01)                                                       /*!<
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 5
-
-
   85:CMSIS/Inc/core_cm3.h **** #define __CM3_CMSIS_VERSION_SUB   (0x30)                                                       /*!<
   86:CMSIS/Inc/core_cm3.h **** #define __CM3_CMSIS_VERSION       ((__CM3_CMSIS_VERSION_MAIN << 16) | __CM3_CMSIS_VERSION_SUB) /*!<
   87:CMSIS/Inc/core_cm3.h **** 
@@ -265,6 +478,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  106:CMSIS/Inc/core_cm3.h ****  *
  107:CMSIS/Inc/core_cm3.h ****  * define access restrictions to peripheral registers
  108:CMSIS/Inc/core_cm3.h ****  */
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 9
+
+
  109:CMSIS/Inc/core_cm3.h **** 
  110:CMSIS/Inc/core_cm3.h **** #ifdef __cplusplus
  111:CMSIS/Inc/core_cm3.h ****   #define     __I     volatile                /*!< defines 'read only' permissions      */
@@ -298,9 +514,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  139:CMSIS/Inc/core_cm3.h ****        uint32_t RESERVED2[24];                                   
  140:CMSIS/Inc/core_cm3.h ****   __IO uint32_t ICPR[8];                      /*!< Offset: 0x180  Interrupt Clear Pending Register 
  141:CMSIS/Inc/core_cm3.h ****        uint32_t RESERVED3[24];                                   
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 6
-
-
  142:CMSIS/Inc/core_cm3.h ****   __IO uint32_t IABR[8];                      /*!< Offset: 0x200  Interrupt Active bit Register    
  143:CMSIS/Inc/core_cm3.h ****        uint32_t RESERVED4[56];                                   
  144:CMSIS/Inc/core_cm3.h ****   __IO uint8_t  IP[240];                      /*!< Offset: 0x300  Interrupt Priority Register (8Bit
@@ -325,6 +538,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  163:CMSIS/Inc/core_cm3.h ****   __IO uint8_t  SHP[12];                      /*!< Offset: 0x18  System Handlers Priority Registers
  164:CMSIS/Inc/core_cm3.h ****   __IO uint32_t SHCSR;                        /*!< Offset: 0x24  System Handler Control and State R
  165:CMSIS/Inc/core_cm3.h ****   __IO uint32_t CFSR;                         /*!< Offset: 0x28  Configurable Fault Status Register
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 10
+
+
  166:CMSIS/Inc/core_cm3.h ****   __IO uint32_t HFSR;                         /*!< Offset: 0x2C  Hard Fault Status Register        
  167:CMSIS/Inc/core_cm3.h ****   __IO uint32_t DFSR;                         /*!< Offset: 0x30  Debug Fault Status Register       
  168:CMSIS/Inc/core_cm3.h ****   __IO uint32_t MMFAR;                        /*!< Offset: 0x34  Mem Manage Address Register       
@@ -358,9 +574,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  196:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_PENDSVSET_Msk             (1ul << SCB_ICSR_PENDSVSET_Pos)                /*!< SCB 
  197:CMSIS/Inc/core_cm3.h **** 
  198:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_PENDSVCLR_Pos             27                                             /*!< SCB 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 7
-
-
  199:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_PENDSVCLR_Msk             (1ul << SCB_ICSR_PENDSVCLR_Pos)                /*!< SCB 
  200:CMSIS/Inc/core_cm3.h **** 
  201:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_PENDSTSET_Pos             26                                             /*!< SCB 
@@ -385,6 +598,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  220:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_VECTACTIVE_Msk            (0x1FFul << SCB_ICSR_VECTACTIVE_Pos)           /*!< SCB 
  221:CMSIS/Inc/core_cm3.h **** 
  222:CMSIS/Inc/core_cm3.h **** /* SCB Interrupt Control State Register Definitions */
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 11
+
+
  223:CMSIS/Inc/core_cm3.h **** #define SCB_VTOR_TBLBASE_Pos               29                                             /*!< SCB 
  224:CMSIS/Inc/core_cm3.h **** #define SCB_VTOR_TBLBASE_Msk               (0x1FFul << SCB_VTOR_TBLBASE_Pos)              /*!< SCB 
  225:CMSIS/Inc/core_cm3.h **** 
@@ -418,9 +634,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  253:CMSIS/Inc/core_cm3.h **** #define SCB_SCR_SEVONPEND_Msk              (1ul << SCB_SCR_SEVONPEND_Pos)                 /*!< SCB 
  254:CMSIS/Inc/core_cm3.h **** 
  255:CMSIS/Inc/core_cm3.h **** #define SCB_SCR_SLEEPDEEP_Pos               2                                             /*!< SCB 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 8
-
-
  256:CMSIS/Inc/core_cm3.h **** #define SCB_SCR_SLEEPDEEP_Msk              (1ul << SCB_SCR_SLEEPDEEP_Pos)                 /*!< SCB 
  257:CMSIS/Inc/core_cm3.h **** 
  258:CMSIS/Inc/core_cm3.h **** #define SCB_SCR_SLEEPONEXIT_Pos             1                                             /*!< SCB 
@@ -445,6 +658,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  277:CMSIS/Inc/core_cm3.h **** #define SCB_CCR_NONBASETHRDENA_Pos          0                                             /*!< SCB 
  278:CMSIS/Inc/core_cm3.h **** #define SCB_CCR_NONBASETHRDENA_Msk         (1ul << SCB_CCR_NONBASETHRDENA_Pos)            /*!< SCB 
  279:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 12
+
+
  280:CMSIS/Inc/core_cm3.h **** /* SCB System Handler Control and State Register Definitions */
  281:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_USGFAULTENA_Pos          18                                             /*!< SCB 
  282:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_USGFAULTENA_Msk          (1ul << SCB_SHCSR_USGFAULTENA_Pos)             /*!< SCB 
@@ -478,9 +694,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  310:CMSIS/Inc/core_cm3.h **** 
  311:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_SVCALLACT_Pos             7                                             /*!< SCB 
  312:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_SVCALLACT_Msk            (1ul << SCB_SHCSR_SVCALLACT_Pos)               /*!< SCB 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 9
-
-
  313:CMSIS/Inc/core_cm3.h ****                                      
  314:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_USGFAULTACT_Pos           3                                             /*!< SCB 
  315:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_USGFAULTACT_Msk          (1ul << SCB_SHCSR_USGFAULTACT_Pos)             /*!< SCB 
@@ -505,6 +718,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  334:CMSIS/Inc/core_cm3.h **** #define SCB_HFSR_DEBUGEVT_Pos              31                                             /*!< SCB 
  335:CMSIS/Inc/core_cm3.h **** #define SCB_HFSR_DEBUGEVT_Msk              (1ul << SCB_HFSR_DEBUGEVT_Pos)                 /*!< SCB 
  336:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 13
+
+
  337:CMSIS/Inc/core_cm3.h **** #define SCB_HFSR_FORCED_Pos                30                                             /*!< SCB 
  338:CMSIS/Inc/core_cm3.h **** #define SCB_HFSR_FORCED_Msk                (1ul << SCB_HFSR_FORCED_Pos)                   /*!< SCB 
  339:CMSIS/Inc/core_cm3.h **** 
@@ -538,9 +754,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  367:CMSIS/Inc/core_cm3.h ****   __IO uint32_t CTRL;                         /*!< Offset: 0x00  SysTick Control and Status Registe
  368:CMSIS/Inc/core_cm3.h ****   __IO uint32_t LOAD;                         /*!< Offset: 0x04  SysTick Reload Value Register     
  369:CMSIS/Inc/core_cm3.h ****   __IO uint32_t VAL;                          /*!< Offset: 0x08  SysTick Current Value Register    
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 10
-
-
  370:CMSIS/Inc/core_cm3.h ****   __I  uint32_t CALIB;                        /*!< Offset: 0x0C  SysTick Calibration Register      
  371:CMSIS/Inc/core_cm3.h **** } SysTick_Type;
  372:CMSIS/Inc/core_cm3.h **** 
@@ -565,6 +778,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  391:CMSIS/Inc/core_cm3.h **** #define SysTick_VAL_CURRENT_Pos             0                                             /*!< SysT
  392:CMSIS/Inc/core_cm3.h **** #define SysTick_VAL_CURRENT_Msk            (0xFFFFFFul << SysTick_VAL_CURRENT_Pos)        /*!< SysT
  393:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 14
+
+
  394:CMSIS/Inc/core_cm3.h **** /* SysTick Calibration Register Definitions */
  395:CMSIS/Inc/core_cm3.h **** #define SysTick_CALIB_NOREF_Pos            31                                             /*!< SysT
  396:CMSIS/Inc/core_cm3.h **** #define SysTick_CALIB_NOREF_Msk            (1ul << SysTick_CALIB_NOREF_Pos)               /*!< SysT
@@ -598,9 +814,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  424:CMSIS/Inc/core_cm3.h ****        uint32_t RESERVED3[29];                                  
  425:CMSIS/Inc/core_cm3.h ****   __IO uint32_t IWR;                          /*!< Offset:       ITM Integration Write Register    
  426:CMSIS/Inc/core_cm3.h ****   __IO uint32_t IRR;                          /*!< Offset:       ITM Integration Read Register     
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 11
-
-
  427:CMSIS/Inc/core_cm3.h ****   __IO uint32_t IMCR;                         /*!< Offset:       ITM Integration Mode Control Regis
  428:CMSIS/Inc/core_cm3.h ****        uint32_t RESERVED4[43];                                  
  429:CMSIS/Inc/core_cm3.h ****   __IO uint32_t LAR;                          /*!< Offset:       ITM Lock Access Register          
@@ -625,6 +838,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  448:CMSIS/Inc/core_cm3.h **** #define ITM_TPR_PRIVMASK_Msk               (0xFul << ITM_TPR_PRIVMASK_Pos)                /*!< ITM 
  449:CMSIS/Inc/core_cm3.h **** 
  450:CMSIS/Inc/core_cm3.h **** /* ITM Trace Control Register Definitions */
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 15
+
+
  451:CMSIS/Inc/core_cm3.h **** #define ITM_TCR_BUSY_Pos                   23                                             /*!< ITM 
  452:CMSIS/Inc/core_cm3.h **** #define ITM_TCR_BUSY_Msk                   (1ul << ITM_TCR_BUSY_Pos)                      /*!< ITM 
  453:CMSIS/Inc/core_cm3.h **** 
@@ -658,9 +874,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  481:CMSIS/Inc/core_cm3.h **** #define ITM_IRR_ATREADYM_Msk               (1ul << ITM_IRR_ATREADYM_Pos)                  /*!< ITM 
  482:CMSIS/Inc/core_cm3.h **** 
  483:CMSIS/Inc/core_cm3.h **** /* ITM Integration Mode Control Register Definitions */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 12
-
-
  484:CMSIS/Inc/core_cm3.h **** #define ITM_IMCR_INTEGRATION_Pos            0                                             /*!< ITM 
  485:CMSIS/Inc/core_cm3.h **** #define ITM_IMCR_INTEGRATION_Msk           (1ul << ITM_IMCR_INTEGRATION_Pos)              /*!< ITM 
  486:CMSIS/Inc/core_cm3.h **** 
@@ -685,6 +898,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  505:CMSIS/Inc/core_cm3.h ****        uint32_t RESERVED0;
  506:CMSIS/Inc/core_cm3.h ****   __I  uint32_t ICTR;                         /*!< Offset: 0x04  Interrupt Control Type Register */
  507:CMSIS/Inc/core_cm3.h **** #if ((defined __CM3_REV) && (__CM3_REV >= 0x200))
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 16
+
+
  508:CMSIS/Inc/core_cm3.h ****   __IO uint32_t ACTLR;                        /*!< Offset: 0x08  Auxiliary Control Register      */
  509:CMSIS/Inc/core_cm3.h **** #else
  510:CMSIS/Inc/core_cm3.h ****        uint32_t RESERVED1;
@@ -718,9 +934,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  538:CMSIS/Inc/core_cm3.h ****   __IO uint32_t CTRL;                         /*!< Offset: 0x04  MPU Control Register              
  539:CMSIS/Inc/core_cm3.h ****   __IO uint32_t RNR;                          /*!< Offset: 0x08  MPU Region RNRber Register        
  540:CMSIS/Inc/core_cm3.h ****   __IO uint32_t RBAR;                         /*!< Offset: 0x0C  MPU Region Base Address Register  
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 13
-
-
  541:CMSIS/Inc/core_cm3.h ****   __IO uint32_t RASR;                         /*!< Offset: 0x10  MPU Region Attribute and Size Regi
  542:CMSIS/Inc/core_cm3.h ****   __IO uint32_t RBAR_A1;                      /*!< Offset: 0x14  MPU Alias 1 Region Base Address Re
  543:CMSIS/Inc/core_cm3.h ****   __IO uint32_t RASR_A1;                      /*!< Offset: 0x18  MPU Alias 1 Region Attribute and S
@@ -745,6 +958,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  562:CMSIS/Inc/core_cm3.h **** #define MPU_CTRL_PRIVDEFENA_Msk            (1ul << MPU_CTRL_PRIVDEFENA_Pos)               /*!< MPU 
  563:CMSIS/Inc/core_cm3.h **** 
  564:CMSIS/Inc/core_cm3.h **** #define MPU_CTRL_HFNMIENA_Pos               1                                             /*!< MPU 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 17
+
+
  565:CMSIS/Inc/core_cm3.h **** #define MPU_CTRL_HFNMIENA_Msk              (1ul << MPU_CTRL_HFNMIENA_Pos)                 /*!< MPU 
  566:CMSIS/Inc/core_cm3.h **** 
  567:CMSIS/Inc/core_cm3.h **** #define MPU_CTRL_ENABLE_Pos                 0                                             /*!< MPU 
@@ -778,9 +994,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  595:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_S_Msk                     (1ul << MPU_RASR_S_Pos)                        /*!< MPU 
  596:CMSIS/Inc/core_cm3.h **** 
  597:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_C_Pos                     17                                             /*!< MPU 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 14
-
-
  598:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_C_Msk                     (1ul << MPU_RASR_C_Pos)                        /*!< MPU 
  599:CMSIS/Inc/core_cm3.h **** 
  600:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_B_Pos                     16                                             /*!< MPU 
@@ -805,6 +1018,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  619:CMSIS/Inc/core_cm3.h ****  */
  620:CMSIS/Inc/core_cm3.h **** typedef struct
  621:CMSIS/Inc/core_cm3.h **** {
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 18
+
+
  622:CMSIS/Inc/core_cm3.h ****   __IO uint32_t DHCSR;                        /*!< Offset: 0x00  Debug Halting Control and Status R
  623:CMSIS/Inc/core_cm3.h ****   __O  uint32_t DCRSR;                        /*!< Offset: 0x04  Debug Core Register Selector Regis
  624:CMSIS/Inc/core_cm3.h ****   __IO uint32_t DCRDR;                        /*!< Offset: 0x08  Debug Core Register Data Register 
@@ -838,9 +1054,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  652:CMSIS/Inc/core_cm3.h **** 
  653:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_C_MASKINTS_Pos      3                                             /*!< Core
  654:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_C_MASKINTS_Msk     (1ul << CoreDebug_DHCSR_C_MASKINTS_Pos)        /*!< Core
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 15
-
-
  655:CMSIS/Inc/core_cm3.h **** 
  656:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_C_STEP_Pos          2                                             /*!< Core
  657:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_C_STEP_Msk         (1ul << CoreDebug_DHCSR_C_STEP_Pos)            /*!< Core
@@ -865,6 +1078,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  676:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_REQ_Pos        19                                             /*!< Core
  677:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_REQ_Msk        (1ul << CoreDebug_DEMCR_MON_REQ_Pos)           /*!< Core
  678:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 19
+
+
  679:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_STEP_Pos       18                                             /*!< Core
  680:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_STEP_Msk       (1ul << CoreDebug_DEMCR_MON_STEP_Pos)          /*!< Core
  681:CMSIS/Inc/core_cm3.h **** 
@@ -898,9 +1114,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  709:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_VC_CORERESET_Pos    0                                             /*!< Core
  710:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_VC_CORERESET_Msk   (1ul << CoreDebug_DEMCR_VC_CORERESET_Pos)      /*!< Core
  711:CMSIS/Inc/core_cm3.h **** /*@}*/ /* end of group CMSIS_CM3_CoreDebug */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 16
-
-
  712:CMSIS/Inc/core_cm3.h **** 
  713:CMSIS/Inc/core_cm3.h **** 
  714:CMSIS/Inc/core_cm3.h **** /* Memory mapping of Cortex-M3 Hardware */
@@ -925,6 +1138,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  733:CMSIS/Inc/core_cm3.h **** 
  734:CMSIS/Inc/core_cm3.h **** /*@}*/ /* end of group CMSIS_CM3_core_register */
  735:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 20
+
+
  736:CMSIS/Inc/core_cm3.h **** 
  737:CMSIS/Inc/core_cm3.h **** /*******************************************************************************
  738:CMSIS/Inc/core_cm3.h ****  *                Hardware Abstraction Layer
@@ -958,9 +1174,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  766:CMSIS/Inc/core_cm3.h **** #define __disable_fault_irq               __disable_fiq
  767:CMSIS/Inc/core_cm3.h **** 
  768:CMSIS/Inc/core_cm3.h **** #define __NOP                             __nop
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 17
-
-
  769:CMSIS/Inc/core_cm3.h **** #define __WFI                             __wfi
  770:CMSIS/Inc/core_cm3.h **** #define __WFE                             __wfe
  771:CMSIS/Inc/core_cm3.h **** #define __SEV                             __sev
@@ -985,6 +1198,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  790:CMSIS/Inc/core_cm3.h **** 
  791:CMSIS/Inc/core_cm3.h **** /**
  792:CMSIS/Inc/core_cm3.h ****  * @brief  Return the Process Stack Pointer
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 21
+
+
  793:CMSIS/Inc/core_cm3.h ****  *
  794:CMSIS/Inc/core_cm3.h ****  * @return ProcessStackPointer
  795:CMSIS/Inc/core_cm3.h ****  *
@@ -1018,9 +1234,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  823:CMSIS/Inc/core_cm3.h ****  * @param  topOfMainStack  Main Stack Pointer
  824:CMSIS/Inc/core_cm3.h ****  *
  825:CMSIS/Inc/core_cm3.h ****  * Assign the value mainStackPointer to the MSP 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 18
-
-
  826:CMSIS/Inc/core_cm3.h ****  * (main stack pointer) Cortex processor register
  827:CMSIS/Inc/core_cm3.h ****  */
  828:CMSIS/Inc/core_cm3.h **** extern void __set_MSP(uint32_t topOfMainStack);
@@ -1045,6 +1258,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  847:CMSIS/Inc/core_cm3.h ****  */
  848:CMSIS/Inc/core_cm3.h **** extern int32_t __REVSH(int16_t value);
  849:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 22
+
+
  850:CMSIS/Inc/core_cm3.h **** 
  851:CMSIS/Inc/core_cm3.h **** #if (__ARMCC_VERSION < 400000)
  852:CMSIS/Inc/core_cm3.h **** 
@@ -1078,9 +1294,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  880:CMSIS/Inc/core_cm3.h ****  *
  881:CMSIS/Inc/core_cm3.h ****  * @return PriMask
  882:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 19
-
-
  883:CMSIS/Inc/core_cm3.h ****  * Return state of the priority mask bit from the priority mask register
  884:CMSIS/Inc/core_cm3.h ****  */
  885:CMSIS/Inc/core_cm3.h **** extern uint32_t __get_PRIMASK(void);
@@ -1105,6 +1318,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  904:CMSIS/Inc/core_cm3.h **** 
  905:CMSIS/Inc/core_cm3.h **** /**
  906:CMSIS/Inc/core_cm3.h ****  * @brief  Set the Fault Mask value
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 23
+
+
  907:CMSIS/Inc/core_cm3.h ****  *
  908:CMSIS/Inc/core_cm3.h ****  * @param  faultMask faultMask value
  909:CMSIS/Inc/core_cm3.h ****  *
@@ -1138,9 +1354,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  937:CMSIS/Inc/core_cm3.h ****  * Removes the exclusive lock which is created by ldrex.
  938:CMSIS/Inc/core_cm3.h ****  */
  939:CMSIS/Inc/core_cm3.h **** #define __CLREX                           __clrex
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 20
-
-
  940:CMSIS/Inc/core_cm3.h **** 
  941:CMSIS/Inc/core_cm3.h **** /**
  942:CMSIS/Inc/core_cm3.h ****  * @brief  Return the Base Priority value
@@ -1165,6 +1378,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  961:CMSIS/Inc/core_cm3.h **** static __INLINE void __set_BASEPRI(uint32_t basePri)
  962:CMSIS/Inc/core_cm3.h **** {
  963:CMSIS/Inc/core_cm3.h ****   register uint32_t __regBasePri         __ASM("basepri");
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 24
+
+
  964:CMSIS/Inc/core_cm3.h ****   __regBasePri = (basePri & 0xff);
  965:CMSIS/Inc/core_cm3.h **** }
  966:CMSIS/Inc/core_cm3.h **** 
@@ -1198,9 +1414,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
  994:CMSIS/Inc/core_cm3.h ****  * @brief  Return the Fault Mask value
  995:CMSIS/Inc/core_cm3.h ****  *
  996:CMSIS/Inc/core_cm3.h ****  * @return FaultMask
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 21
-
-
  997:CMSIS/Inc/core_cm3.h ****  *
  998:CMSIS/Inc/core_cm3.h ****  * Return the content of the fault mask register
  999:CMSIS/Inc/core_cm3.h ****  */
@@ -1225,6 +1438,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1018:CMSIS/Inc/core_cm3.h **** 
 1019:CMSIS/Inc/core_cm3.h **** /**
 1020:CMSIS/Inc/core_cm3.h ****  * @brief  Return the Control Register value
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 25
+
+
 1021:CMSIS/Inc/core_cm3.h ****  * 
 1022:CMSIS/Inc/core_cm3.h ****  * @return Control value
 1023:CMSIS/Inc/core_cm3.h ****  *
@@ -1258,9 +1474,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1051:CMSIS/Inc/core_cm3.h **** 
 1052:CMSIS/Inc/core_cm3.h **** #define __enable_irq                              __enable_interrupt        /*!< global Interrupt e
 1053:CMSIS/Inc/core_cm3.h **** #define __disable_irq                             __disable_interrupt       /*!< global Interrupt d
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 22
-
-
 1054:CMSIS/Inc/core_cm3.h **** 
 1055:CMSIS/Inc/core_cm3.h **** static __INLINE void __enable_fault_irq()         { __ASM ("cpsie f"); }
 1056:CMSIS/Inc/core_cm3.h **** static __INLINE void __disable_fault_irq()        { __ASM ("cpsid f"); }
@@ -1285,6 +1498,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1075:CMSIS/Inc/core_cm3.h **** 
 1076:CMSIS/Inc/core_cm3.h **** 
 1077:CMSIS/Inc/core_cm3.h **** /**
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 26
+
+
 1078:CMSIS/Inc/core_cm3.h ****  * @brief  Return the Process Stack Pointer
 1079:CMSIS/Inc/core_cm3.h ****  *
 1080:CMSIS/Inc/core_cm3.h ****  * @return ProcessStackPointer
@@ -1318,9 +1534,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1108:CMSIS/Inc/core_cm3.h ****  *
 1109:CMSIS/Inc/core_cm3.h ****  * @param  topOfMainStack  Main Stack Pointer
 1110:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 23
-
-
 1111:CMSIS/Inc/core_cm3.h ****  * Assign the value mainStackPointer to the MSP 
 1112:CMSIS/Inc/core_cm3.h ****  * (main stack pointer) Cortex processor register
 1113:CMSIS/Inc/core_cm3.h ****  */
@@ -1345,6 +1558,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1132:CMSIS/Inc/core_cm3.h ****  * Reverse bit order of value
 1133:CMSIS/Inc/core_cm3.h ****  */
 1134:CMSIS/Inc/core_cm3.h **** extern uint32_t __RBIT(uint32_t value);
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 27
+
+
 1135:CMSIS/Inc/core_cm3.h **** 
 1136:CMSIS/Inc/core_cm3.h **** /**
 1137:CMSIS/Inc/core_cm3.h ****  * @brief  LDR Exclusive (8 bit)
@@ -1378,9 +1594,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1165:CMSIS/Inc/core_cm3.h **** 
 1166:CMSIS/Inc/core_cm3.h **** /**
 1167:CMSIS/Inc/core_cm3.h ****  * @brief  STR Exclusive (8 bit)
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 24
-
-
 1168:CMSIS/Inc/core_cm3.h ****  *
 1169:CMSIS/Inc/core_cm3.h ****  * @param  value  value to store
 1170:CMSIS/Inc/core_cm3.h ****  * @param  *addr  address pointer
@@ -1405,6 +1618,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1189:CMSIS/Inc/core_cm3.h ****  * @brief  STR Exclusive (32 bit)
 1190:CMSIS/Inc/core_cm3.h ****  *
 1191:CMSIS/Inc/core_cm3.h ****  * @param  value  value to store
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 28
+
+
 1192:CMSIS/Inc/core_cm3.h ****  * @param  *addr  address pointer
 1193:CMSIS/Inc/core_cm3.h ****  * @return        successful / failed
 1194:CMSIS/Inc/core_cm3.h ****  *
@@ -1438,9 +1654,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1222:CMSIS/Inc/core_cm3.h ****  *
 1223:CMSIS/Inc/core_cm3.h ****  * @return ProcessStackPointer
 1224:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 25
-
-
 1225:CMSIS/Inc/core_cm3.h ****  * Return the actual process stack pointer
 1226:CMSIS/Inc/core_cm3.h ****  */
 1227:CMSIS/Inc/core_cm3.h **** extern uint32_t __get_PSP(void);
@@ -1465,6 +1678,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1246:CMSIS/Inc/core_cm3.h ****  */
 1247:CMSIS/Inc/core_cm3.h **** extern uint32_t __get_MSP(void);
 1248:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 29
+
+
 1249:CMSIS/Inc/core_cm3.h **** /**
 1250:CMSIS/Inc/core_cm3.h ****  * @brief  Set the Main Stack Pointer
 1251:CMSIS/Inc/core_cm3.h ****  *
@@ -1498,9 +1714,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1279:CMSIS/Inc/core_cm3.h ****  *
 1280:CMSIS/Inc/core_cm3.h ****  * @return PriMask
 1281:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 26
-
-
 1282:CMSIS/Inc/core_cm3.h ****  * Return state of the priority mask bit from the priority mask register
 1283:CMSIS/Inc/core_cm3.h ****  */
 1284:CMSIS/Inc/core_cm3.h **** extern uint32_t  __get_PRIMASK(void);
@@ -1525,6 +1738,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1303:CMSIS/Inc/core_cm3.h **** 
 1304:CMSIS/Inc/core_cm3.h **** /**
 1305:CMSIS/Inc/core_cm3.h ****  * @brief  Set the Fault Mask value
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 30
+
+
 1306:CMSIS/Inc/core_cm3.h ****  *
 1307:CMSIS/Inc/core_cm3.h ****  * @param  faultMask  faultMask value
 1308:CMSIS/Inc/core_cm3.h ****  *
@@ -1558,9 +1774,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1336:CMSIS/Inc/core_cm3.h ****  *
 1337:CMSIS/Inc/core_cm3.h ****  * Reverse byte order in integer value
 1338:CMSIS/Inc/core_cm3.h ****  */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 27
-
-
 1339:CMSIS/Inc/core_cm3.h **** extern uint32_t __REV(uint32_t value);
 1340:CMSIS/Inc/core_cm3.h **** 
 1341:CMSIS/Inc/core_cm3.h **** /**
@@ -1585,6 +1798,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1360:CMSIS/Inc/core_cm3.h **** 
 1361:CMSIS/Inc/core_cm3.h **** /**
 1362:CMSIS/Inc/core_cm3.h ****  * @brief  Reverse bit order of value
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 31
+
+
 1363:CMSIS/Inc/core_cm3.h ****  *
 1364:CMSIS/Inc/core_cm3.h ****  * @param  value  value to reverse
 1365:CMSIS/Inc/core_cm3.h ****  * @return        reversed value
@@ -1618,9 +1834,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1393:CMSIS/Inc/core_cm3.h ****  *
 1394:CMSIS/Inc/core_cm3.h ****  * @param  *addr  address pointer
 1395:CMSIS/Inc/core_cm3.h ****  * @return        value of (*address)
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 28
-
-
 1396:CMSIS/Inc/core_cm3.h ****  *
 1397:CMSIS/Inc/core_cm3.h ****  * Exclusive LDR command for 32 bit values
 1398:CMSIS/Inc/core_cm3.h ****  */
@@ -1645,6 +1858,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1417:CMSIS/Inc/core_cm3.h ****  * @return        successful / failed
 1418:CMSIS/Inc/core_cm3.h ****  *
 1419:CMSIS/Inc/core_cm3.h ****  * Exclusive STR command for 16 bit values
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 32
+
+
 1420:CMSIS/Inc/core_cm3.h ****  */
 1421:CMSIS/Inc/core_cm3.h **** extern uint32_t __STREXH(uint16_t value, uint16_t *addr);
 1422:CMSIS/Inc/core_cm3.h **** 
@@ -1678,9 +1894,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1450:CMSIS/Inc/core_cm3.h ****   - Core SysTick Functions
 1451:CMSIS/Inc/core_cm3.h ****   - Core Reset Functions
 1452:CMSIS/Inc/core_cm3.h **** */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 29
-
-
 1453:CMSIS/Inc/core_cm3.h **** /*@{*/
 1454:CMSIS/Inc/core_cm3.h **** 
 1455:CMSIS/Inc/core_cm3.h **** /* ##########################   NVIC functions  #################################### */
@@ -1705,6 +1918,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1474:CMSIS/Inc/core_cm3.h ****   reg_value &= ~(SCB_AIRCR_VECTKEY_Msk | SCB_AIRCR_PRIGROUP_Msk);             /* clear bits to chan
 1475:CMSIS/Inc/core_cm3.h ****   reg_value  =  (reg_value                       |
 1476:CMSIS/Inc/core_cm3.h ****                 (0x5FA << SCB_AIRCR_VECTKEY_Pos) | 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 33
+
+
 1477:CMSIS/Inc/core_cm3.h ****                 (PriorityGroupTmp << 8));                                     /* Insert write key a
 1478:CMSIS/Inc/core_cm3.h ****   SCB->AIRCR =  reg_value;
 1479:CMSIS/Inc/core_cm3.h **** }
@@ -1731,411 +1947,308 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 1
 1500:CMSIS/Inc/core_cm3.h ****  * The interrupt number cannot be a negative value.
 1501:CMSIS/Inc/core_cm3.h ****  */
 1502:CMSIS/Inc/core_cm3.h **** static __INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
- 119              		.loc 2 1502 22 view .LVU34
- 120              	.LBB5:
+ 243              		.loc 2 1502 22 view .LVU73
+ 244              	.LBB5:
 1503:CMSIS/Inc/core_cm3.h **** {
 1504:CMSIS/Inc/core_cm3.h ****   NVIC->ISER[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F)); /* enable interrupt */
- 121              		.loc 2 1504 3 view .LVU35
- 122              		.loc 2 1504 39 is_stmt 0 view .LVU36
- 123 007a 134A     		ldr	r2, .L6+12
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 30
+ 245              		.loc 2 1504 3 view .LVU74
+ 246              		.loc 2 1504 39 is_stmt 0 view .LVU75
+ 247 00ca 0C4A     		ldr	r2, .L13+12
+ 248 00cc 0821     		movs	r1, #8
+ 249 00ce 1160     		str	r1, [r2]
+ 250              	.LVL4:
+ 251              		.loc 2 1504 39 view .LVU76
+ 252              	.LBE5:
+ 253              	.LBE4:
+  39:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+ 254              		.loc 1 39 5 is_stmt 1 view .LVU77
+  39:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+ 255              		.loc 1 39 14 is_stmt 0 view .LVU78
+ 256 00d0 9A88     		ldrh	r2, [r3, #4]
+ 257 00d2 92B2     		uxth	r2, r2
+ 258 00d4 22F01002 		bic	r2, r2, #16
+ 259 00d8 92B2     		uxth	r2, r2
+ 260 00da 9A80     		strh	r2, [r3, #4]	@ movhi
+  40:rtc.c         ****     
+ 261              		.loc 1 40 5 is_stmt 1 view .LVU79
+ 262              	.L11:
+  40:rtc.c         ****     
+ 263              		.loc 1 40 56 discriminator 1 view .LVU80
+  40:rtc.c         ****     
+ 264              		.loc 1 40 11 discriminator 1 view .LVU81
+  40:rtc.c         ****     
+ 265              		.loc 1 40 16 is_stmt 0 discriminator 1 view .LVU82
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 34
 
 
- 124 007c 0821     		movs	r1, #8
- 125 007e 1160     		str	r1, [r2]
- 126              	.LVL1:
- 127              		.loc 2 1504 39 view .LVU37
- 128              	.LBE5:
- 129              	.LBE4:
-  28:rtc.c         ****         // exit rtc configuration mode
-  29:rtc.c         ****         RTC->CRL &= ~RTC_CRL_CNF;      
- 130              		.loc 1 29 9 is_stmt 1 view .LVU38
- 131              		.loc 1 29 18 is_stmt 0 view .LVU39
- 132 0080 9A88     		ldrh	r2, [r3, #4]
- 133 0082 92B2     		uxth	r2, r2
- 134 0084 22F01002 		bic	r2, r2, #16
- 135 0088 92B2     		uxth	r2, r2
- 136 008a 9A80     		strh	r2, [r3, #4]	@ movhi
-  30:rtc.c         ****         while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
- 137              		.loc 1 30 9 is_stmt 1 view .LVU40
- 138              	.L4:
- 139              		.loc 1 30 60 discriminator 1 view .LVU41
- 140              		.loc 1 30 15 discriminator 1 view .LVU42
- 141              		.loc 1 30 20 is_stmt 0 discriminator 1 view .LVU43
- 142 008c 0D4B     		ldr	r3, .L6+8
- 143 008e 9B88     		ldrh	r3, [r3, #4]
- 144              		.loc 1 30 15 discriminator 1 view .LVU44
- 145 0090 13F0200F 		tst	r3, #32
- 146 0094 FAD0     		beq	.L4
-  31:rtc.c         ****     //}
-  32:rtc.c         ****     RTC->CRL &= (uint16_t) ~RTC_CRL_RSF;
- 147              		.loc 1 32 5 is_stmt 1 view .LVU45
- 148              		.loc 1 32 14 is_stmt 0 view .LVU46
- 149 0096 0B4A     		ldr	r2, .L6+8
- 150 0098 9388     		ldrh	r3, [r2, #4]
- 151 009a 9BB2     		uxth	r3, r3
- 152 009c 23F00803 		bic	r3, r3, #8
- 153 00a0 9BB2     		uxth	r3, r3
- 154 00a2 9380     		strh	r3, [r2, #4]	@ movhi
-  33:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RSF) != RTC_CRL_RSF);
- 155              		.loc 1 33 5 is_stmt 1 view .LVU47
- 156              	.L5:
- 157              		.loc 1 33 52 discriminator 1 view .LVU48
- 158              		.loc 1 33 11 discriminator 1 view .LVU49
- 159              		.loc 1 33 16 is_stmt 0 discriminator 1 view .LVU50
- 160 00a4 074B     		ldr	r3, .L6+8
- 161 00a6 9B88     		ldrh	r3, [r3, #4]
- 162              		.loc 1 33 11 discriminator 1 view .LVU51
- 163 00a8 13F0080F 		tst	r3, #8
- 164 00ac FAD0     		beq	.L5
-  34:rtc.c         **** 
-  35:rtc.c         **** 
-  36:rtc.c         ****     
-  37:rtc.c         ****     sys_time.hours = 0;
- 165              		.loc 1 37 5 is_stmt 1 view .LVU52
- 166              		.loc 1 37 20 is_stmt 0 view .LVU53
- 167 00ae 074B     		ldr	r3, .L6+16
- 168 00b0 0022     		movs	r2, #0
- 169 00b2 1A70     		strb	r2, [r3]
-  38:rtc.c         ****     sys_time.minutes = 0;
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 31
-
-
- 170              		.loc 1 38 5 is_stmt 1 view .LVU54
- 171              		.loc 1 38 22 is_stmt 0 view .LVU55
- 172 00b4 5A70     		strb	r2, [r3, #1]
-  39:rtc.c         ****     sys_time.seconds = 0;
- 173              		.loc 1 39 5 is_stmt 1 view .LVU56
- 174              		.loc 1 39 22 is_stmt 0 view .LVU57
- 175 00b6 9A70     		strb	r2, [r3, #2]
-  40:rtc.c         **** }
- 176              		.loc 1 40 1 view .LVU58
- 177 00b8 7047     		bx	lr
- 178              	.L7:
- 179 00ba 00BF     		.align	2
- 180              	.L6:
- 181 00bc 00100240 		.word	1073876992
- 182 00c0 00700040 		.word	1073770496
- 183 00c4 00280040 		.word	1073752064
- 184 00c8 00E100E0 		.word	-536813312
- 185 00cc 00000000 		.word	.LANCHOR0
- 186              		.cfi_endproc
- 187              	.LFE29:
- 189              		.section	.text.rtc_get_time,"ax",%progbits
- 190              		.align	1
- 191              		.global	rtc_get_time
- 192              		.syntax unified
- 193              		.thumb
- 194              		.thumb_func
- 196              	rtc_get_time:
- 197              	.LVL2:
- 198              	.LFB30:
-  41:rtc.c         **** 
-  42:rtc.c         **** // get system time from rtc module
+ 266 00dc 064B     		ldr	r3, .L13+8
+ 267 00de 9B88     		ldrh	r3, [r3, #4]
+  40:rtc.c         ****     
+ 268              		.loc 1 40 11 discriminator 1 view .LVU83
+ 269 00e0 13F0200F 		tst	r3, #32
+ 270 00e4 FAD0     		beq	.L11
+  42:rtc.c         **** }
+ 271              		.loc 1 42 5 is_stmt 1 view .LVU84
+ 272 00e6 0648     		ldr	r0, .L13+16
+ 273 00e8 FFF7FEFF 		bl	rtc_get_time
+ 274              	.LVL5:
   43:rtc.c         **** 
-  44:rtc.c         **** void rtc_get_time(time_t *t) {
- 199              		.loc 1 44 30 is_stmt 1 view -0
- 200              		.cfi_startproc
- 201              		@ args = 0, pretend = 0, frame = 0
- 202              		@ frame_needed = 0, uses_anonymous_args = 0
- 203              		@ link register save eliminated.
-  45:rtc.c         ****     uint32_t time_var = (RTC->CNTH<<16)|RTC->CNTL;
- 204              		.loc 1 45 5 view .LVU60
- 205              		.loc 1 45 29 is_stmt 0 view .LVU61
- 206 0000 0F4A     		ldr	r2, .L9
- 207 0002 118B     		ldrh	r1, [r2, #24]
- 208              		.loc 1 45 44 view .LVU62
- 209 0004 938B     		ldrh	r3, [r2, #28]
- 210 0006 9BB2     		uxth	r3, r3
- 211              		.loc 1 45 40 view .LVU63
- 212 0008 43EA0143 		orr	r3, r3, r1, lsl #16
- 213              	.LVL3:
-  46:rtc.c         ****     t->hours = time_var/3600;
- 214              		.loc 1 46 5 is_stmt 1 view .LVU64
- 215              		.loc 1 46 24 is_stmt 0 view .LVU65
- 216 000c 02F1A342 		add	r2, r2, #1367343104
- 217 0010 02F50A12 		add	r2, r2, #2260992
- 218 0014 02F6C532 		addw	r2, r2, #3013
- 219 0018 A2FB0312 		umull	r1, r2, r2, r3
- 220 001c D20A     		lsrs	r2, r2, #11
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 32
+ 275              		.loc 1 43 1 is_stmt 0 view .LVU85
+ 276 00ec 08BD     		pop	{r3, pc}
+ 277              	.L14:
+ 278 00ee 00BF     		.align	2
+ 279              	.L13:
+ 280 00f0 00100240 		.word	1073876992
+ 281 00f4 00700040 		.word	1073770496
+ 282 00f8 00280040 		.word	1073752064
+ 283 00fc 00E100E0 		.word	-536813312
+ 284 0100 00000000 		.word	.LANCHOR0
+ 285              		.cfi_endproc
+ 286              	.LFE29:
+ 288              		.section	.text.rtc_set_time,"ax",%progbits
+ 289              		.align	1
+ 290              		.global	rtc_set_time
+ 291              		.syntax unified
+ 292              		.thumb
+ 293              		.thumb_func
+ 295              	rtc_set_time:
+ 296              	.LVL6:
+ 297              	.LFB31:
+  53:rtc.c         **** 
+  54:rtc.c         **** // set system time
+  55:rtc.c         **** 
+  56:rtc.c         **** void rtc_set_time(time_t *t) {
+ 298              		.loc 1 56 30 is_stmt 1 view -0
+ 299              		.cfi_startproc
+ 300              		@ args = 0, pretend = 0, frame = 0
+ 301              		@ frame_needed = 0, uses_anonymous_args = 0
+ 302              		@ link register save eliminated.
+  57:rtc.c         ****     uint32_t time_var = t->hours*3600+t->minutes*60+t->seconds;
+ 303              		.loc 1 57 5 view .LVU87
+ 304              		.loc 1 57 26 is_stmt 0 view .LVU88
+ 305 0000 0178     		ldrb	r1, [r0]	@ zero_extendqisi2
+ 306              		.loc 1 57 40 view .LVU89
+ 307 0002 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 308              		.loc 1 57 49 view .LVU90
+ 309 0004 C3EB0313 		rsb	r3, r3, r3, lsl #4
+ 310 0008 9A00     		lsls	r2, r3, #2
+ 311              		.loc 1 57 38 view .LVU91
+ 312 000a 4FF46163 		mov	r3, #3600
+ 313 000e 03FB0122 		mla	r2, r3, r1, r2
+ 314              		.loc 1 57 54 view .LVU92
+ 315 0012 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 316              		.loc 1 57 52 view .LVU93
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 35
 
 
- 221              		.loc 1 46 14 view .LVU66
- 222 001e 0270     		strb	r2, [r0]
-  47:rtc.c         ****     t->minutes = (time_var%3600)/60;
- 223              		.loc 1 47 5 is_stmt 1 view .LVU67
- 224              		.loc 1 47 27 is_stmt 0 view .LVU68
- 225 0020 4FF46161 		mov	r1, #3600
- 226 0024 01FB1233 		mls	r3, r1, r2, r3
- 227              	.LVL4:
- 228              		.loc 1 47 33 view .LVU69
- 229 0028 064A     		ldr	r2, .L9+4
- 230 002a A2FB0312 		umull	r1, r2, r2, r3
- 231 002e 5209     		lsrs	r2, r2, #5
- 232              		.loc 1 47 16 view .LVU70
- 233 0030 4270     		strb	r2, [r0, #1]
-  48:rtc.c         ****     t->seconds = (time_var%3600)%60;
- 234              		.loc 1 48 5 is_stmt 1 view .LVU71
- 235              		.loc 1 48 33 is_stmt 0 view .LVU72
- 236 0032 C2EB0212 		rsb	r2, r2, r2, lsl #4
- 237 0036 A3EB8203 		sub	r3, r3, r2, lsl #2
- 238              		.loc 1 48 16 view .LVU73
- 239 003a 8370     		strb	r3, [r0, #2]
-  49:rtc.c         **** }
- 240              		.loc 1 49 1 view .LVU74
- 241 003c 7047     		bx	lr
- 242              	.L10:
- 243 003e 00BF     		.align	2
- 244              	.L9:
- 245 0040 00280040 		.word	1073752064
- 246 0044 89888888 		.word	-2004318071
- 247              		.cfi_endproc
- 248              	.LFE30:
- 250              		.section	.text.rtc_set_time,"ax",%progbits
- 251              		.align	1
- 252              		.global	rtc_set_time
- 253              		.syntax unified
- 254              		.thumb
- 255              		.thumb_func
- 257              	rtc_set_time:
- 258              	.LVL5:
- 259              	.LFB31:
-  50:rtc.c         **** 
-  51:rtc.c         **** // set system time
-  52:rtc.c         **** 
-  53:rtc.c         **** void rtc_set_time(time_t *t) {
- 260              		.loc 1 53 30 is_stmt 1 view -0
- 261              		.cfi_startproc
- 262              		@ args = 0, pretend = 0, frame = 0
- 263              		@ frame_needed = 0, uses_anonymous_args = 0
- 264              		@ link register save eliminated.
-  54:rtc.c         ****     uint32_t time_var = t->hours*3600+t->minutes*60+t->seconds;
- 265              		.loc 1 54 5 view .LVU76
- 266              		.loc 1 54 26 is_stmt 0 view .LVU77
- 267 0000 0178     		ldrb	r1, [r0]	@ zero_extendqisi2
- 268              		.loc 1 54 40 view .LVU78
- 269 0002 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
- 270              		.loc 1 54 49 view .LVU79
- 271 0004 C3EB0313 		rsb	r3, r3, r3, lsl #4
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 33
+ 317 0014 1A44     		add	r2, r2, r3
+ 318              	.LVL7:
+  58:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+ 319              		.loc 1 58 5 is_stmt 1 view .LVU94
+ 320              	.L16:
+ 321              		.loc 1 58 56 discriminator 1 view .LVU95
+ 322              		.loc 1 58 11 discriminator 1 view .LVU96
+ 323              		.loc 1 58 16 is_stmt 0 discriminator 1 view .LVU97
+ 324 0016 0D4B     		ldr	r3, .L18
+ 325 0018 9B88     		ldrh	r3, [r3, #4]
+ 326              		.loc 1 58 11 discriminator 1 view .LVU98
+ 327 001a 13F0200F 		tst	r3, #32
+ 328 001e FAD0     		beq	.L16
+  59:rtc.c         ****     RTC->CRL |= RTC_CRL_CNF; 
+ 329              		.loc 1 59 5 is_stmt 1 view .LVU99
+ 330              		.loc 1 59 14 is_stmt 0 view .LVU100
+ 331 0020 0A49     		ldr	r1, .L18
+ 332 0022 8B88     		ldrh	r3, [r1, #4]
+ 333 0024 9BB2     		uxth	r3, r3
+ 334 0026 43F01003 		orr	r3, r3, #16
+ 335 002a 8B80     		strh	r3, [r1, #4]	@ movhi
+  60:rtc.c         ****     RTC->CNTL = (uint16_t)(time_var&0xFFFF);
+ 336              		.loc 1 60 5 is_stmt 1 view .LVU101
+ 337              		.loc 1 60 17 is_stmt 0 view .LVU102
+ 338 002c 93B2     		uxth	r3, r2
+ 339              		.loc 1 60 15 view .LVU103
+ 340 002e 8B83     		strh	r3, [r1, #28]	@ movhi
+  61:rtc.c         ****     RTC->CNTH = (uint16_t)(time_var>>16);
+ 341              		.loc 1 61 5 is_stmt 1 view .LVU104
+ 342              		.loc 1 61 17 is_stmt 0 view .LVU105
+ 343 0030 120C     		lsrs	r2, r2, #16
+ 344              	.LVL8:
+ 345              		.loc 1 61 15 view .LVU106
+ 346 0032 0A83     		strh	r2, [r1, #24]	@ movhi
+  62:rtc.c         ****     RTC->CRL &= ~RTC_CRL_CNF; 
+ 347              		.loc 1 62 5 is_stmt 1 view .LVU107
+ 348              		.loc 1 62 14 is_stmt 0 view .LVU108
+ 349 0034 8B88     		ldrh	r3, [r1, #4]
+ 350 0036 9BB2     		uxth	r3, r3
+ 351 0038 23F01003 		bic	r3, r3, #16
+ 352 003c 9BB2     		uxth	r3, r3
+ 353 003e 8B80     		strh	r3, [r1, #4]	@ movhi
+  63:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+ 354              		.loc 1 63 5 is_stmt 1 view .LVU109
+ 355              	.L17:
+ 356              		.loc 1 63 56 discriminator 1 view .LVU110
+ 357              		.loc 1 63 11 discriminator 1 view .LVU111
+ 358              		.loc 1 63 16 is_stmt 0 discriminator 1 view .LVU112
+ 359 0040 024B     		ldr	r3, .L18
+ 360 0042 9B88     		ldrh	r3, [r3, #4]
+ 361              		.loc 1 63 11 discriminator 1 view .LVU113
+ 362 0044 13F0200F 		tst	r3, #32
+ 363 0048 FAD0     		beq	.L17
+  64:rtc.c         **** }
+ 364              		.loc 1 64 1 view .LVU114
+ 365 004a 7047     		bx	lr
+ 366              	.L19:
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 36
 
 
- 272 0008 9A00     		lsls	r2, r3, #2
- 273              		.loc 1 54 38 view .LVU80
- 274 000a 4FF46163 		mov	r3, #3600
- 275 000e 03FB0122 		mla	r2, r3, r1, r2
- 276              		.loc 1 54 54 view .LVU81
- 277 0012 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
- 278              		.loc 1 54 52 view .LVU82
- 279 0014 1A44     		add	r2, r2, r3
- 280              	.LVL6:
-  55:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
- 281              		.loc 1 55 5 is_stmt 1 view .LVU83
- 282              	.L12:
- 283              		.loc 1 55 56 discriminator 1 view .LVU84
- 284              		.loc 1 55 11 discriminator 1 view .LVU85
- 285              		.loc 1 55 16 is_stmt 0 discriminator 1 view .LVU86
- 286 0016 0D4B     		ldr	r3, .L14
- 287 0018 9B88     		ldrh	r3, [r3, #4]
- 288              		.loc 1 55 11 discriminator 1 view .LVU87
- 289 001a 13F0200F 		tst	r3, #32
- 290 001e FAD0     		beq	.L12
-  56:rtc.c         ****     RTC->CRL |= RTC_CRL_CNF; 
- 291              		.loc 1 56 5 is_stmt 1 view .LVU88
- 292              		.loc 1 56 14 is_stmt 0 view .LVU89
- 293 0020 0A49     		ldr	r1, .L14
- 294 0022 8B88     		ldrh	r3, [r1, #4]
- 295 0024 9BB2     		uxth	r3, r3
- 296 0026 43F01003 		orr	r3, r3, #16
- 297 002a 8B80     		strh	r3, [r1, #4]	@ movhi
-  57:rtc.c         ****     RTC->CNTL = (uint16_t)(time_var&0xFFFF);
- 298              		.loc 1 57 5 is_stmt 1 view .LVU90
- 299              		.loc 1 57 17 is_stmt 0 view .LVU91
- 300 002c 93B2     		uxth	r3, r2
- 301              		.loc 1 57 15 view .LVU92
- 302 002e 8B83     		strh	r3, [r1, #28]	@ movhi
-  58:rtc.c         ****     RTC->CNTH = (uint16_t)(time_var>>16);
- 303              		.loc 1 58 5 is_stmt 1 view .LVU93
- 304              		.loc 1 58 17 is_stmt 0 view .LVU94
- 305 0030 120C     		lsrs	r2, r2, #16
- 306              	.LVL7:
- 307              		.loc 1 58 15 view .LVU95
- 308 0032 0A83     		strh	r2, [r1, #24]	@ movhi
-  59:rtc.c         ****     RTC->CRL &= ~RTC_CRL_CNF; 
- 309              		.loc 1 59 5 is_stmt 1 view .LVU96
- 310              		.loc 1 59 14 is_stmt 0 view .LVU97
- 311 0034 8B88     		ldrh	r3, [r1, #4]
- 312 0036 9BB2     		uxth	r3, r3
- 313 0038 23F01003 		bic	r3, r3, #16
- 314 003c 9BB2     		uxth	r3, r3
- 315 003e 8B80     		strh	r3, [r1, #4]	@ movhi
-  60:rtc.c         ****     while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
- 316              		.loc 1 60 5 is_stmt 1 view .LVU98
- 317              	.L13:
- 318              		.loc 1 60 56 discriminator 1 view .LVU99
- 319              		.loc 1 60 11 discriminator 1 view .LVU100
- 320              		.loc 1 60 16 is_stmt 0 discriminator 1 view .LVU101
- 321 0040 024B     		ldr	r3, .L14
- 322 0042 9B88     		ldrh	r3, [r3, #4]
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 34
+ 367              		.align	2
+ 368              	.L18:
+ 369 004c 00280040 		.word	1073752064
+ 370              		.cfi_endproc
+ 371              	.LFE31:
+ 373              		.section	.text.RTC_IRQHandler,"ax",%progbits
+ 374              		.align	1
+ 375              		.global	RTC_IRQHandler
+ 376              		.syntax unified
+ 377              		.thumb
+ 378              		.thumb_func
+ 380              	RTC_IRQHandler:
+ 381              	.LFB32:
+  65:rtc.c         **** 
+  66:rtc.c         **** // second innterrupt handler (generates every second)
+  67:rtc.c         **** 
+  68:rtc.c         **** void RTC_IRQHandler(void) {
+ 382              		.loc 1 68 27 is_stmt 1 view -0
+ 383              		.cfi_startproc
+ 384              		@ args = 0, pretend = 0, frame = 0
+ 385              		@ frame_needed = 0, uses_anonymous_args = 0
+  69:rtc.c         ****     if(RTC->CRL &RTC_CRL_SECF) {
+ 386              		.loc 1 69 5 view .LVU116
+ 387              		.loc 1 69 11 is_stmt 0 view .LVU117
+ 388 0000 104B     		ldr	r3, .L28
+ 389 0002 9B88     		ldrh	r3, [r3, #4]
+ 390              		.loc 1 69 7 view .LVU118
+ 391 0004 13F0010F 		tst	r3, #1
+ 392 0008 00D1     		bne	.L26
+ 393 000a 7047     		bx	lr
+ 394              	.L26:
+  68:rtc.c         ****     if(RTC->CRL &RTC_CRL_SECF) {
+ 395              		.loc 1 68 27 view .LVU119
+ 396 000c 10B5     		push	{r4, lr}
+ 397              	.LCFI1:
+ 398              		.cfi_def_cfa_offset 8
+ 399              		.cfi_offset 4, -8
+ 400              		.cfi_offset 14, -4
+  70:rtc.c         ****         RTC->CRL &= ~RTC_CRL_SECF;
+ 401              		.loc 1 70 9 is_stmt 1 view .LVU120
+ 402              		.loc 1 70 18 is_stmt 0 view .LVU121
+ 403 000e 0D4A     		ldr	r2, .L28
+ 404 0010 9388     		ldrh	r3, [r2, #4]
+ 405 0012 9BB2     		uxth	r3, r3
+ 406 0014 23F00103 		bic	r3, r3, #1
+ 407 0018 9BB2     		uxth	r3, r3
+ 408 001a 9380     		strh	r3, [r2, #4]	@ movhi
+  71:rtc.c         ****         // get system time
+  72:rtc.c         ****         rtc_get_time(&sys_time);
+ 409              		.loc 1 72 9 is_stmt 1 view .LVU122
+ 410 001c 0A4C     		ldr	r4, .L28+4
+ 411 001e 2046     		mov	r0, r4
+ 412 0020 FFF7FEFF 		bl	rtc_get_time
+ 413              	.LVL9:
+  73:rtc.c         ****         // do we need to update display time? 
+  74:rtc.c         ****         // (update neede every 60 seconds)
+  75:rtc.c         ****         if(sys_time.seconds == 0) {
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 37
 
 
- 323              		.loc 1 60 11 discriminator 1 view .LVU102
- 324 0044 13F0200F 		tst	r3, #32
- 325 0048 FAD0     		beq	.L13
-  61:rtc.c         **** }
- 326              		.loc 1 61 1 view .LVU103
- 327 004a 7047     		bx	lr
- 328              	.L15:
- 329              		.align	2
- 330              	.L14:
- 331 004c 00280040 		.word	1073752064
- 332              		.cfi_endproc
- 333              	.LFE31:
- 335              		.section	.text.RTC_IRQHandler,"ax",%progbits
- 336              		.align	1
- 337              		.global	RTC_IRQHandler
- 338              		.syntax unified
- 339              		.thumb
- 340              		.thumb_func
- 342              	RTC_IRQHandler:
- 343              	.LFB32:
-  62:rtc.c         **** 
-  63:rtc.c         **** // second innterrupt handler (generates every second)
-  64:rtc.c         **** 
-  65:rtc.c         **** void RTC_IRQHandler(void) {
- 344              		.loc 1 65 27 is_stmt 1 view -0
- 345              		.cfi_startproc
- 346              		@ args = 0, pretend = 0, frame = 0
- 347              		@ frame_needed = 0, uses_anonymous_args = 0
-  66:rtc.c         ****     if(RTC->CRL &RTC_CRL_SECF) {
- 348              		.loc 1 66 5 view .LVU105
- 349              		.loc 1 66 11 is_stmt 0 view .LVU106
- 350 0000 104B     		ldr	r3, .L24
- 351 0002 9B88     		ldrh	r3, [r3, #4]
- 352              		.loc 1 66 7 view .LVU107
- 353 0004 13F0010F 		tst	r3, #1
- 354 0008 00D1     		bne	.L22
- 355 000a 7047     		bx	lr
- 356              	.L22:
-  65:rtc.c         ****     if(RTC->CRL &RTC_CRL_SECF) {
- 357              		.loc 1 65 27 view .LVU108
- 358 000c 10B5     		push	{r4, lr}
- 359              	.LCFI0:
- 360              		.cfi_def_cfa_offset 8
- 361              		.cfi_offset 4, -8
- 362              		.cfi_offset 14, -4
-  67:rtc.c         ****         RTC->CRL &= ~RTC_CRL_SECF;
- 363              		.loc 1 67 9 is_stmt 1 view .LVU109
- 364              		.loc 1 67 18 is_stmt 0 view .LVU110
- 365 000e 0D4A     		ldr	r2, .L24
- 366 0010 9388     		ldrh	r3, [r2, #4]
- 367 0012 9BB2     		uxth	r3, r3
- 368 0014 23F00103 		bic	r3, r3, #1
- 369 0018 9BB2     		uxth	r3, r3
- 370 001a 9380     		strh	r3, [r2, #4]	@ movhi
-  68:rtc.c         ****         // get system time
-  69:rtc.c         ****         rtc_get_time(&sys_time);
- 371              		.loc 1 69 9 is_stmt 1 view .LVU111
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 35
+ 414              		.loc 1 75 9 view .LVU123
+ 415              		.loc 1 75 20 is_stmt 0 view .LVU124
+ 416 0024 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 417              		.loc 1 75 11 view .LVU125
+ 418 0026 03B1     		cbz	r3, .L27
+ 419              	.L20:
+  76:rtc.c         ****             // time needs to be updated on display
+  77:rtc.c         ****             controller_set_state(EVT_TIME_UPDATED);
+  78:rtc.c         ****             // counter reaches 24 hours, set to 0
+  79:rtc.c         ****             if(sys_time.hours == 24) {
+  80:rtc.c         ****                 sys_time.hours = 0;
+  81:rtc.c         ****                 rtc_set_time(&sys_time);
+  82:rtc.c         ****             }
+  83:rtc.c         ****         }
+  84:rtc.c         ****     }
+  85:rtc.c         **** }...
+ 420              		.loc 1 85 1 view .LVU126
+ 421 0028 10BD     		pop	{r4, pc}
+ 422              	.L27:
+  77:rtc.c         ****             controller_set_state(EVT_TIME_UPDATED);
+ 423              		.loc 1 77 13 is_stmt 1 view .LVU127
+ 424 002a 0220     		movs	r0, #2
+ 425 002c FFF7FEFF 		bl	controller_set_state
+ 426              	.LVL10:
+  79:rtc.c         ****             if(sys_time.hours == 24) {
+ 427              		.loc 1 79 13 view .LVU128
+  79:rtc.c         ****             if(sys_time.hours == 24) {
+ 428              		.loc 1 79 24 is_stmt 0 view .LVU129
+ 429 0030 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  79:rtc.c         ****             if(sys_time.hours == 24) {
+ 430              		.loc 1 79 15 view .LVU130
+ 431 0032 182B     		cmp	r3, #24
+ 432 0034 F8D1     		bne	.L20
+  80:rtc.c         ****                 sys_time.hours = 0;
+ 433              		.loc 1 80 17 is_stmt 1 view .LVU131
+  80:rtc.c         ****                 sys_time.hours = 0;
+ 434              		.loc 1 80 32 is_stmt 0 view .LVU132
+ 435 0036 2046     		mov	r0, r4
+ 436 0038 0023     		movs	r3, #0
+ 437 003a 2370     		strb	r3, [r4]
+  81:rtc.c         ****                 rtc_set_time(&sys_time);
+ 438              		.loc 1 81 17 is_stmt 1 view .LVU133
+ 439 003c FFF7FEFF 		bl	rtc_set_time
+ 440              	.LVL11:
+ 441              		.loc 1 85 1 is_stmt 0 view .LVU134
+ 442 0040 F2E7     		b	.L20
+ 443              	.L29:
+ 444 0042 00BF     		.align	2
+ 445              	.L28:
+ 446 0044 00280040 		.word	1073752064
+ 447 0048 00000000 		.word	.LANCHOR0
+ 448              		.cfi_endproc
+ 449              	.LFE32:
+ 451              		.global	sys_time
+ 452              		.section	.bss.sys_time,"aw",%nobits
+ 453              		.align	2
+ 454              		.set	.LANCHOR0,. + 0
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 38
 
 
- 372 001c 0A4C     		ldr	r4, .L24+4
- 373 001e 2046     		mov	r0, r4
- 374 0020 FFF7FEFF 		bl	rtc_get_time
- 375              	.LVL8:
-  70:rtc.c         ****         // do we need to update display time? 
-  71:rtc.c         ****         // (update neede every 60 seconds)
-  72:rtc.c         ****         if(sys_time.seconds == 0) {
- 376              		.loc 1 72 9 view .LVU112
- 377              		.loc 1 72 20 is_stmt 0 view .LVU113
- 378 0024 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 379              		.loc 1 72 11 view .LVU114
- 380 0026 03B1     		cbz	r3, .L23
- 381              	.L16:
-  73:rtc.c         ****             // time needs to be updated on display
-  74:rtc.c         ****             controller_set_state(EVT_TIME_UPDATED);
-  75:rtc.c         ****             // counter reaches 24 hours, set to 0
-  76:rtc.c         ****             if(sys_time.hours == 24) {
-  77:rtc.c         ****                 sys_time.hours = 0;
-  78:rtc.c         ****                 rtc_set_time(&sys_time);
-  79:rtc.c         ****             }
-  80:rtc.c         ****         }
-  81:rtc.c         ****     }
-  82:rtc.c         **** }...
- 382              		.loc 1 82 1 view .LVU115
- 383 0028 10BD     		pop	{r4, pc}
- 384              	.L23:
-  74:rtc.c         ****             controller_set_state(EVT_TIME_UPDATED);
- 385              		.loc 1 74 13 is_stmt 1 view .LVU116
- 386 002a 0220     		movs	r0, #2
- 387 002c FFF7FEFF 		bl	controller_set_state
- 388              	.LVL9:
-  76:rtc.c         ****             if(sys_time.hours == 24) {
- 389              		.loc 1 76 13 view .LVU117
-  76:rtc.c         ****             if(sys_time.hours == 24) {
- 390              		.loc 1 76 24 is_stmt 0 view .LVU118
- 391 0030 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
-  76:rtc.c         ****             if(sys_time.hours == 24) {
- 392              		.loc 1 76 15 view .LVU119
- 393 0032 182B     		cmp	r3, #24
- 394 0034 F8D1     		bne	.L16
-  77:rtc.c         ****                 sys_time.hours = 0;
- 395              		.loc 1 77 17 is_stmt 1 view .LVU120
-  77:rtc.c         ****                 sys_time.hours = 0;
- 396              		.loc 1 77 32 is_stmt 0 view .LVU121
- 397 0036 2046     		mov	r0, r4
- 398 0038 0023     		movs	r3, #0
- 399 003a 2370     		strb	r3, [r4]
-  78:rtc.c         ****                 rtc_set_time(&sys_time);
- 400              		.loc 1 78 17 is_stmt 1 view .LVU122
- 401 003c FFF7FEFF 		bl	rtc_set_time
- 402              	.LVL10:
- 403              		.loc 1 82 1 is_stmt 0 view .LVU123
- 404 0040 F2E7     		b	.L16
- 405              	.L25:
- 406 0042 00BF     		.align	2
- 407              	.L24:
- 408 0044 00280040 		.word	1073752064
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 36
-
-
- 409 0048 00000000 		.word	.LANCHOR0
- 410              		.cfi_endproc
- 411              	.LFE32:
- 413              		.global	sys_time
- 414              		.section	.bss.sys_time,"aw",%nobits
- 415              		.align	2
- 416              		.set	.LANCHOR0,. + 0
- 419              	sys_time:
- 420 0000 000000   		.space	3
- 421              		.text
- 422              	.Letext0:
- 423              		.file 3 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_
- 424              		.file 4 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
- 425              		.file 5 "rtc.h"
- 426              		.file 6 "CMSIS/Inc/stm32f10x.h"
- 427              		.file 7 "controller.h"
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s 			page 37
+ 457              	sys_time:
+ 458 0000 000000   		.space	3
+ 459              		.text
+ 460              	.Letext0:
+ 461              		.file 3 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_
+ 462              		.file 4 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 463              		.file 5 "rtc.h"
+ 464              		.file 6 "CMSIS/Inc/stm32f10x.h"
+ 465              		.file 7 "controller.h"
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s 			page 39
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 rtc.c
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:18     .text.rtc_init:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:24     .text.rtc_init:0000000000000000 rtc_init
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:181    .text.rtc_init:00000000000000bc $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:190    .text.rtc_get_time:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:196    .text.rtc_get_time:0000000000000000 rtc_get_time
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:245    .text.rtc_get_time:0000000000000040 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:251    .text.rtc_set_time:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:257    .text.rtc_set_time:0000000000000000 rtc_set_time
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:331    .text.rtc_set_time:000000000000004c $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:336    .text.RTC_IRQHandler:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:342    .text.RTC_IRQHandler:0000000000000000 RTC_IRQHandler
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:408    .text.RTC_IRQHandler:0000000000000044 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:419    .bss.sys_time:0000000000000000 sys_time
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccFSg4E1.s:415    .bss.sys_time:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:18     .text.rtc_get_time:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:24     .text.rtc_get_time:0000000000000000 rtc_get_time
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:74     .text.rtc_get_time:0000000000000040 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:80     .text.rtc_init:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:86     .text.rtc_init:0000000000000000 rtc_init
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:280    .text.rtc_init:00000000000000f0 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:289    .text.rtc_set_time:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:295    .text.rtc_set_time:0000000000000000 rtc_set_time
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:369    .text.rtc_set_time:000000000000004c $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:374    .text.RTC_IRQHandler:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:380    .text.RTC_IRQHandler:0000000000000000 RTC_IRQHandler
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:446    .text.RTC_IRQHandler:0000000000000044 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:457    .bss.sys_time:0000000000000000 sys_time
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc4sAnjO.s:453    .bss.sys_time:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 controller_set_state

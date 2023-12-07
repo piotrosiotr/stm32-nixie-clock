@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
   29:controller.c  ****     // enable minute digits blink
   30:controller.c  ****     digit_swapper_enable_blink(2);
   31:controller.c  ****     digit_swapper_enable_blink(3);
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 2
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 2
 
 
   32:controller.c  ****     current_state = STATE_EDIT_MINUTES;
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
   12:controller.c  ****     // enable blink for hour digits
   57              		.loc 1 12 46 is_stmt 1 view -0
   58              		.cfi_startproc
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 3
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 3
 
 
   59              		@ args = 0, pretend = 0, frame = 0
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
  105              		.thumb
  106              		.thumb_func
  108              	increase_hours:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 4
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 4
 
 
  109              	.LVL7:
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
   42:controller.c  **** 
  150              		.loc 1 42 1 view .LVU27
  151 0022 08BD     		pop	{r3, pc}
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 5
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 5
 
 
  152              	.L12:
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
  198              		.loc 1 49 5 is_stmt 1 view .LVU37
  199 0016 0348     		ldr	r0, .L16
  200              	.LVL11:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 6
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 6
 
 
   49:controller.c  ****     current_state = STATE_EDIT_MINUTES;
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
  238              		.cfi_offset 14, -4
   74:controller.c  ****     rtc_get_time(&editable_time);
  239              		.loc 1 74 5 is_stmt 1 view .LVU44
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 7
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 7
 
 
  240 0002 054C     		ldr	r4, .L20
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
  289 0004 FFF7FEFF 		bl	digit_swapper_disable_blink
  290              	.LVL19:
   28:controller.c  ****     // enable minute digits blink
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 8
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 8
 
 
  291              		.loc 1 28 5 is_stmt 1 view .LVU54
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
  339              	.LVL24:
   64:controller.c  ****     digit_swapper_disable_blink(3);
  340              		.loc 1 64 5 is_stmt 0 view .LVU63
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 9
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 9
 
 
  341 0004 FFF7FEFF 		bl	digit_swapper_disable_blink
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
   90:controller.c  ****     current_state = STATE_MAIN;
  380              		.loc 1 90 5 view .LVU70
  381              		.loc 1 90 19 is_stmt 0 view .LVU71
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 10
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 10
 
 
  382 0000 014B     		ldr	r3, .L31
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
  430              	.L37:
  431 0016 00BF     		.align	2
  432              	.L36:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 11
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 11
 
 
  433 0018 00000000 		.word	.LANCHOR0
@@ -639,44 +639,44 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 1
  475              		.file 4 "controller.h"
  476              		.file 5 "rtc.h"
  477              		.file 6 "digit_swapper.h"
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s 			page 12
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 controller.c
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:18     .text.play_glitch:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:24     .text.play_glitch:0000000000000000 play_glitch
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:43     .text.play_glitch:0000000000000008 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:48     .text.enter_hour_edit:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:54     .text.enter_hour_edit:0000000000000000 enter_hour_edit
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:96     .text.enter_hour_edit:0000000000000024 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:102    .text.increase_hours:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:108    .text.increase_hours:0000000000000000 increase_hours
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:155    .text.increase_hours:0000000000000024 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:161    .text.increase_minutes:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:167    .text.increase_minutes:0000000000000000 increase_minutes
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:214    .text.increase_minutes:0000000000000024 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:220    .text.update_time:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:226    .text.update_time:0000000000000000 update_time
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:260    .text.update_time:0000000000000018 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:266    .text.enter_min_edit:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:272    .text.enter_min_edit:0000000000000000 enter_min_edit
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:313    .text.enter_min_edit:0000000000000024 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:318    .text.enter_main_state:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:324    .text.enter_main_state:0000000000000000 enter_main_state
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:361    .text.enter_main_state:000000000000001c $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:367    .text.controller_init:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:373    .text.controller_init:0000000000000000 controller_init
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:390    .text.controller_init:0000000000000008 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:395    .text.controller_set_state:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:401    .text.controller_set_state:0000000000000000 controller_set_state
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:433    .text.controller_set_state:0000000000000018 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:444    .bss.current_state:0000000000000000 current_state
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:451    .bss.editable_time:0000000000000000 editable_time
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:445    .bss.current_state:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:447    .bss.editable_time:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:454    .rodata.callbacks:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc8vxZwK.s:458    .rodata.callbacks:0000000000000000 callbacks
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:18     .text.play_glitch:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:24     .text.play_glitch:0000000000000000 play_glitch
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:43     .text.play_glitch:0000000000000008 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:48     .text.enter_hour_edit:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:54     .text.enter_hour_edit:0000000000000000 enter_hour_edit
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:96     .text.enter_hour_edit:0000000000000024 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:102    .text.increase_hours:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:108    .text.increase_hours:0000000000000000 increase_hours
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:155    .text.increase_hours:0000000000000024 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:161    .text.increase_minutes:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:167    .text.increase_minutes:0000000000000000 increase_minutes
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:214    .text.increase_minutes:0000000000000024 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:220    .text.update_time:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:226    .text.update_time:0000000000000000 update_time
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:260    .text.update_time:0000000000000018 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:266    .text.enter_min_edit:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:272    .text.enter_min_edit:0000000000000000 enter_min_edit
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:313    .text.enter_min_edit:0000000000000024 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:318    .text.enter_main_state:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:324    .text.enter_main_state:0000000000000000 enter_main_state
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:361    .text.enter_main_state:000000000000001c $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:367    .text.controller_init:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:373    .text.controller_init:0000000000000000 controller_init
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:390    .text.controller_init:0000000000000008 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:395    .text.controller_set_state:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:401    .text.controller_set_state:0000000000000000 controller_set_state
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:433    .text.controller_set_state:0000000000000018 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:444    .bss.current_state:0000000000000000 current_state
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:451    .bss.editable_time:0000000000000000 editable_time
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:445    .bss.current_state:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:447    .bss.editable_time:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:454    .rodata.callbacks:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cclW7q9O.s:458    .rodata.callbacks:0000000000000000 callbacks
 
 UNDEFINED SYMBOLS
 digit_swapper_enable_blink

@@ -9,8 +9,8 @@ void rtc_init(void) {
     // enable rtc (check reference manual)
     RCC->APB1ENR |= RCC_APB1ENR_PWREN | RCC_APB1ENR_BKPEN; 
     PWR->CR |= PWR_CR_DBP; 
-    //if ((RCC->BDCR & RCC_BDCR_RTCEN) != RCC_BDCR_RTCEN)
-    //{
+    if ((RCC->BDCR & RCC_BDCR_RTCEN) != RCC_BDCR_RTCEN)
+    {
         RCC->BDCR |= RCC_BDCR_BDRST;  
         RCC->BDCR &= ~RCC_BDCR_BDRST;
         RCC->BDCR |= RCC_BDCR_RTCSEL_LSE;     
@@ -20,23 +20,27 @@ void rtc_init(void) {
         // enter configuration mode
         while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
         RTC->CRL |= RTC_CRL_CNF;            
-        RTC->CRL &= ~RTC_CRL_SECF;
         RTC->PRLL = 0x7FFF;  
-        // enable rtc second interrupt               
-        RTC->CRH |= RTC_CRH_SECIE;
-        NVIC_EnableIRQ(RTC_IRQn); 
         // exit rtc configuration mode
         RTC->CRL &= ~RTC_CRL_CNF;      
         while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
-    //}
+    }
     RTC->CRL &= (uint16_t) ~RTC_CRL_RSF;
     while ((RTC->CRL & RTC_CRL_RSF) != RTC_CRL_RSF);
 
-
+    // enter configuration mode
+    while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
+    RTC->CRL |= RTC_CRL_CNF;            
+    RTC->CRL &= ~RTC_CRL_SECF;
+    // enable rtc second interrupt               
+    RTC->CRH |= RTC_CRH_SECIE;
+    NVIC_EnableIRQ(RTC_IRQn); 
+    // exit rtc configuration mode
+    RTC->CRL &= ~RTC_CRL_CNF;      
+    while ((RTC->CRL & RTC_CRL_RTOFF) != RTC_CRL_RTOFF);
     
-    sys_time.hours = 0;
-    sys_time.minutes = 0;
-    sys_time.seconds = 0;
+    rtc_get_time(&sys_time);
+    controller_set_state(EVT_TIME_UPDATED);
 }
 
 // get system time from rtc module

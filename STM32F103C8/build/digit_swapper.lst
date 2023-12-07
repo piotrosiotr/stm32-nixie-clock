@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
   39 0004 9369     		ldr	r3, [r2, #24]
   40 0006 43F00403 		orr	r3, r3, #4
   41 000a 9361     		str	r3, [r2, #24]
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 2
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 2
 
 
   18:digit_swapper.c ****     // PA4 - Anode 1 - PP
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
   31:digit_swapper.c ****     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
   83              		.loc 1 31 5 is_stmt 1 view .LVU19
   84              		.loc 1 31 18 is_stmt 0 view .LVU20
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 3
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 3
 
 
   85 004e D369     		ldr	r3, [r2, #28]
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
   37:CMSIS/Inc/core_cm3.h ****  * . 
   38:CMSIS/Inc/core_cm3.h ****  *   - Error 550: \n
   39:CMSIS/Inc/core_cm3.h ****  *     __regBasePri = (basePri & 0x1ff); \n
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 4
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 4
 
 
   40:CMSIS/Inc/core_cm3.h ****  *     Warning 550: Symbol '__regBasePri' (line 271) not accessed
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
   94:CMSIS/Inc/core_cm3.h **** #endif
   95:CMSIS/Inc/core_cm3.h **** 
   96:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 5
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 5
 
 
   97:CMSIS/Inc/core_cm3.h **** #ifndef __NVIC_PRIO_BITS
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  151:CMSIS/Inc/core_cm3.h **** /** @addtogroup CMSIS_CM3_SCB CMSIS CM3 SCB
  152:CMSIS/Inc/core_cm3.h ****   memory mapped structure for System Control Block (SCB)
  153:CMSIS/Inc/core_cm3.h ****   @{
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 6
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 6
 
 
  154:CMSIS/Inc/core_cm3.h ****  */
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  208:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_ISRPREEMPT_Msk            (1ul << SCB_ICSR_ISRPREEMPT_Pos)               /*!< SCB 
  209:CMSIS/Inc/core_cm3.h **** 
  210:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_ISRPENDING_Pos            22                                             /*!< SCB 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 7
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 7
 
 
  211:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_ISRPENDING_Msk            (1ul << SCB_ICSR_ISRPENDING_Pos)               /*!< SCB 
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  265:CMSIS/Inc/core_cm3.h **** #define SCB_CCR_BFHFNMIGN_Pos               8                                             /*!< SCB 
  266:CMSIS/Inc/core_cm3.h **** #define SCB_CCR_BFHFNMIGN_Msk              (1ul << SCB_CCR_BFHFNMIGN_Pos)                 /*!< SCB 
  267:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 8
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 8
 
 
  268:CMSIS/Inc/core_cm3.h **** #define SCB_CCR_DIV_0_TRP_Pos               4                                             /*!< SCB 
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  322:CMSIS/Inc/core_cm3.h **** 
  323:CMSIS/Inc/core_cm3.h **** /* SCB Configurable Fault Status Registers Definitions */
  324:CMSIS/Inc/core_cm3.h **** #define SCB_CFSR_USGFAULTSR_Pos            16                                             /*!< SCB 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 9
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 9
 
 
  325:CMSIS/Inc/core_cm3.h **** #define SCB_CFSR_USGFAULTSR_Msk            (0xFFFFul << SCB_CFSR_USGFAULTSR_Pos)          /*!< SCB 
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  379:CMSIS/Inc/core_cm3.h **** 
  380:CMSIS/Inc/core_cm3.h **** #define SysTick_CTRL_TICKINT_Pos            1                                             /*!< SysT
  381:CMSIS/Inc/core_cm3.h **** #define SysTick_CTRL_TICKINT_Msk           (1ul << SysTick_CTRL_TICKINT_Pos)              /*!< SysT
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 10
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 10
 
 
  382:CMSIS/Inc/core_cm3.h **** 
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  436:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PID0;                         /*!< Offset:       ITM Peripheral Identification Regi
  437:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PID1;                         /*!< Offset:       ITM Peripheral Identification Regi
  438:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PID2;                         /*!< Offset:       ITM Peripheral Identification Regi
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 11
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 11
 
 
  439:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PID3;                         /*!< Offset:       ITM Peripheral Identification Regi
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  493:CMSIS/Inc/core_cm3.h **** 
  494:CMSIS/Inc/core_cm3.h **** #define ITM_LSR_Present_Pos                 0                                             /*!< ITM 
  495:CMSIS/Inc/core_cm3.h **** #define ITM_LSR_Present_Msk                (1ul << ITM_LSR_Present_Pos)                   /*!< ITM 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 12
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 12
 
 
  496:CMSIS/Inc/core_cm3.h **** /*@}*/ /* end of group CMSIS_CM3_ITM */
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  550:CMSIS/Inc/core_cm3.h **** /* MPU Type Register */
  551:CMSIS/Inc/core_cm3.h **** #define MPU_TYPE_IREGION_Pos               16                                             /*!< MPU 
  552:CMSIS/Inc/core_cm3.h **** #define MPU_TYPE_IREGION_Msk               (0xFFul << MPU_TYPE_IREGION_Pos)               /*!< MPU 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 13
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 13
 
 
  553:CMSIS/Inc/core_cm3.h **** 
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  607:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_SIZE_Msk                  (0x1Ful << MPU_RASR_SIZE_Pos)                  /*!< MPU 
  608:CMSIS/Inc/core_cm3.h **** 
  609:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_ENA_Pos                     0                                            /*!< MPU 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 14
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 14
 
 
  610:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_ENA_Msk                    (0x1Ful << MPU_RASR_ENA_Pos)                  /*!< MPU 
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  664:CMSIS/Inc/core_cm3.h **** 
  665:CMSIS/Inc/core_cm3.h **** /* Debug Core Register Selector Register */
  666:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DCRSR_REGWnR_Pos         16                                             /*!< Core
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 15
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 15
 
 
  667:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DCRSR_REGWnR_Msk         (1ul << CoreDebug_DCRSR_REGWnR_Pos)            /*!< Core
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  721:CMSIS/Inc/core_cm3.h **** 
  722:CMSIS/Inc/core_cm3.h **** #define InterruptType       ((InterruptType_Type *) SCS_BASE)         /*!< Interrupt Type Register 
  723:CMSIS/Inc/core_cm3.h **** #define SCB                 ((SCB_Type *)           SCB_BASE)         /*!< SCB configuration struct
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 16
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 16
 
 
  724:CMSIS/Inc/core_cm3.h **** #define SysTick             ((SysTick_Type *)       SysTick_BASE)     /*!< SysTick configuration st
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  778:CMSIS/Inc/core_cm3.h **** #define __LDREXH(ptr)                     ((unsigned short) __ldrex(ptr))
  779:CMSIS/Inc/core_cm3.h **** #define __LDREXW(ptr)                     ((unsigned int  ) __ldrex(ptr))
  780:CMSIS/Inc/core_cm3.h **** #define __STREXB(value, ptr)              __strex(value, ptr)
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 17
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 17
 
 
  781:CMSIS/Inc/core_cm3.h **** #define __STREXH(value, ptr)              __strex(value, ptr)
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  835:CMSIS/Inc/core_cm3.h ****  *
  836:CMSIS/Inc/core_cm3.h ****  * Reverse byte order in unsigned short value
  837:CMSIS/Inc/core_cm3.h ****  */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 18
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 18
 
 
  838:CMSIS/Inc/core_cm3.h **** extern uint32_t __REV16(uint16_t value);
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  892:CMSIS/Inc/core_cm3.h ****  * Set the priority mask bit in the priority mask register
  893:CMSIS/Inc/core_cm3.h ****  */
  894:CMSIS/Inc/core_cm3.h **** extern void __set_PRIMASK(uint32_t priMask);
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 19
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 19
 
 
  895:CMSIS/Inc/core_cm3.h **** 
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  949:CMSIS/Inc/core_cm3.h **** {
  950:CMSIS/Inc/core_cm3.h ****   register uint32_t __regBasePri         __ASM("basepri");
  951:CMSIS/Inc/core_cm3.h ****   return(__regBasePri);
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 20
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 20
 
 
  952:CMSIS/Inc/core_cm3.h **** }
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
 1006:CMSIS/Inc/core_cm3.h **** /**
 1007:CMSIS/Inc/core_cm3.h ****  * @brief  Set the Fault Mask value
 1008:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 21
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 21
 
 
 1009:CMSIS/Inc/core_cm3.h ****  * @param  faultMask  faultMask value
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
 1063:CMSIS/Inc/core_cm3.h **** 
 1064:CMSIS/Inc/core_cm3.h **** /* intrinsic void __ISB(void)                                     */
 1065:CMSIS/Inc/core_cm3.h **** /* intrinsic void __DSB(void)                                     */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 22
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 22
 
 
 1066:CMSIS/Inc/core_cm3.h **** /* intrinsic void __DMB(void)                                     */
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
 1120:CMSIS/Inc/core_cm3.h ****  * @return        reversed value
 1121:CMSIS/Inc/core_cm3.h ****  *
 1122:CMSIS/Inc/core_cm3.h ****  * Reverse byte order in unsigned short value
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 23
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 23
 
 
 1123:CMSIS/Inc/core_cm3.h ****  */
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
 1177:CMSIS/Inc/core_cm3.h **** /**
 1178:CMSIS/Inc/core_cm3.h ****  * @brief  STR Exclusive (16 bit)
 1179:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 24
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 24
 
 
 1180:CMSIS/Inc/core_cm3.h ****  * @param  value  value to store
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
 1234:CMSIS/Inc/core_cm3.h ****  * Assign the value ProcessStackPointer to the MSP 
 1235:CMSIS/Inc/core_cm3.h ****  * (process stack pointer) Cortex processor register
 1236:CMSIS/Inc/core_cm3.h ****  */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 25
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 25
 
 
 1237:CMSIS/Inc/core_cm3.h **** extern void __set_PSP(uint32_t topOfProcStack);
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
 1291:CMSIS/Inc/core_cm3.h ****  * Set the priority mask bit in the priority mask register
 1292:CMSIS/Inc/core_cm3.h ****  */
 1293:CMSIS/Inc/core_cm3.h **** extern void __set_PRIMASK(uint32_t priMask);
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 26
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 26
 
 
 1294:CMSIS/Inc/core_cm3.h **** 
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
 1348:CMSIS/Inc/core_cm3.h ****  */
 1349:CMSIS/Inc/core_cm3.h **** extern uint32_t __REV16(uint16_t value);
 1350:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 27
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 27
 
 
 1351:CMSIS/Inc/core_cm3.h **** /**
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
 1405:CMSIS/Inc/core_cm3.h ****  * @param  *addr  address pointer
 1406:CMSIS/Inc/core_cm3.h ****  * @return        successful / failed
 1407:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 28
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 28
 
 
 1408:CMSIS/Inc/core_cm3.h ****  * Exclusive STR command for 8 bit values
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
 1462:CMSIS/Inc/core_cm3.h ****  * Set the priority grouping field using the required unlock sequence.
 1463:CMSIS/Inc/core_cm3.h ****  * The parameter priority_grouping is assigned to the field 
 1464:CMSIS/Inc/core_cm3.h ****  * SCB->AIRCR [10:8] PRIGROUP field. Only values from 0..7 are used.
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 29
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 29
 
 
 1465:CMSIS/Inc/core_cm3.h ****  * In case of a conflict between priority grouping and available
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  112              		.loc 1 36 18 is_stmt 0 view .LVU29
  113 006c D369     		ldr	r3, [r2, #28]
  114 006e 43F00403 		orr	r3, r3, #4
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 30
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 30
 
 
  115 0072 D361     		str	r3, [r2, #28]
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  158 00a0 00100240 		.word	1073876992
  159 00a4 00080140 		.word	1073809408
  160 00a8 00E100E0 		.word	-536813312
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 31
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 31
 
 
  161 00ac 00080040 		.word	1073743872
@@ -1858,7 +1858,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
   58:digit_swapper.c **** 
   59:digit_swapper.c **** // disable anode swapping
   60:digit_swapper.c **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 32
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 32
 
 
   61:digit_swapper.c **** void digit_swapper_stop(void) {
@@ -1918,7 +1918,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
   69:digit_swapper.c ****     display[1]->value = t->hours%10;
  256              		.loc 1 69 5 is_stmt 1 view .LVU63
  257              		.loc 1 69 26 is_stmt 0 view .LVU64
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 33
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 33
 
 
  258 0016 90F800C0 		ldrb	ip, [r0]	@ zero_extendqisi2
@@ -1978,7 +1978,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  307              		.loc 1 76 51 is_stmt 1 view -0
  308              		.cfi_startproc
  309              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 34
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 34
 
 
  310              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -2038,7 +2038,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  361              		.syntax unified
  362              		.thumb
  363              		.thumb_func
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 35
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 35
 
 
  365              	digit_swapper_disable_blink:
@@ -2098,7 +2098,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  411              		.loc 1 88 35 view .LVU110
  412 0022 D170     		strb	r1, [r2, #3]
  413 0024 EEE7     		b	.L20
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 36
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 36
 
 
  414              	.L22:
@@ -2158,7 +2158,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  455              		.loc 1 103 21 is_stmt 0 view .LVU119
  456 0010 4FF40012 		mov	r2, #2097152
  457 0014 1A61     		str	r2, [r3, #16]
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 37
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 37
 
 
  104:digit_swapper.c ****         GPIOA->BSRR = GPIO_BSRR_BR6;
@@ -2218,7 +2218,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  470 0024 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
  471 0026 B3FA83F3 		clz	r3, r3
  472 002a 5B09     		lsrs	r3, r3, #5
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 38
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 38
 
 
  473              		.loc 1 145 14 view .LVU126
@@ -2278,7 +2278,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  515 005c 1A70     		strb	r2, [r3]
  516 005e E0E7     		b	.L27
  517              	.L35:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 39
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 39
 
 
  112:digit_swapper.c ****                     GPIOA->BSRR = GPIO_BSRR_BS4;
@@ -2338,7 +2338,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  126:digit_swapper.c ****                     GPIOA->BSRR = GPIO_BSRR_BS6;
  558              		.loc 1 126 21 is_stmt 1 view .LVU153
  559 0094 5878     		ldrb	r0, [r3, #1]	@ zero_extendqisi2
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 40
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 40
 
 
  560 0096 FFF7FEFF 		bl	decoder_set_digit
@@ -2398,7 +2398,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  147:digit_swapper.c **** 
  148:digit_swapper.c **** void TIM2_IRQHandler(void) {
  607              		.loc 1 148 28 is_stmt 1 view -0
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 41
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 41
 
 
  608              		.cfi_startproc
@@ -2458,7 +2458,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  653              		.cfi_startproc
  654              		@ args = 0, pretend = 0, frame = 0
  655              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 42
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 42
 
 
  656              		@ link register save eliminated.
@@ -2518,7 +2518,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  705 0030 D178     		ldrb	r1, [r2, #3]	@ zero_extendqisi2
  706              		.loc 1 161 67 discriminator 1 view .LVU193
  707 0032 B1FA81F1 		clz	r1, r1
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 43
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 43
 
 
  708 0036 4909     		lsrs	r1, r1, #5
@@ -2578,7 +2578,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  770              		.align	2
  773              	digit_3:
  774 0000 03       		.byte	3
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 44
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 44
 
 
  775 0001 00       		.byte	0
@@ -2600,51 +2600,51 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 1
  793              		.file 6 "rtc.h"
  794              		.file 7 "digit_swapper.h"
  795              		.file 8 "decoder.h"
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s 			page 45
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s 			page 45
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 digit_swapper.c
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:18     .text.digit_swapper_init:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:24     .text.digit_swapper_init:0000000000000000 digit_swapper_init
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:158    .text.digit_swapper_init:00000000000000a0 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:166    .text.digit_swapper_start:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:172    .text.digit_swapper_start:0000000000000000 digit_swapper_start
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:200    .text.digit_swapper_stop:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:206    .text.digit_swapper_stop:0000000000000000 digit_swapper_stop
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:227    .text.digit_swapper_set_time:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:233    .text.digit_swapper_set_time:0000000000000000 digit_swapper_set_time
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:292    .text.digit_swapper_set_time:0000000000000058 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:298    .text.digit_swapper_enable_blink:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:304    .text.digit_swapper_enable_blink:0000000000000000 digit_swapper_enable_blink
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:354    .text.digit_swapper_enable_blink:0000000000000020 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:359    .text.digit_swapper_disable_blink:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:365    .text.digit_swapper_disable_blink:0000000000000000 digit_swapper_disable_blink
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:421    .text.digit_swapper_disable_blink:0000000000000028 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:426    .text.next_digit:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:432    .text.next_digit:0000000000000000 next_digit
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:485    .text.next_digit:000000000000003c $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:489    .text.next_digit:0000000000000040 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:591    .text.next_digit:00000000000000bc $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:599    .text.TIM2_IRQHandler:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:605    .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:644    .text.TIM4_IRQHandler:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:650    .text.TIM4_IRQHandler:0000000000000000 TIM4_IRQHandler
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:721    .text.TIM4_IRQHandler:0000000000000040 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:749    .bss.gap_flag:0000000000000000 gap_flag
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:743    .bss.digit_idx:0000000000000000 digit_idx
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:783    .data.display:0000000000000000 display
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:773    .data.digit_3:0000000000000000 digit_3
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:764    .data.digit_2:0000000000000000 digit_2
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:755    .data.digit_1:0000000000000000 digit_1
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:737    .bss.digit_0:0000000000000000 digit_0
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:734    .bss.digit_0:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:744    .bss.digit_idx:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:750    .bss.gap_flag:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:752    .data.digit_1:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:761    .data.digit_2:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:770    .data.digit_3:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccTAA8OR.s:779    .data.display:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:18     .text.digit_swapper_init:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:24     .text.digit_swapper_init:0000000000000000 digit_swapper_init
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:158    .text.digit_swapper_init:00000000000000a0 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:166    .text.digit_swapper_start:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:172    .text.digit_swapper_start:0000000000000000 digit_swapper_start
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:200    .text.digit_swapper_stop:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:206    .text.digit_swapper_stop:0000000000000000 digit_swapper_stop
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:227    .text.digit_swapper_set_time:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:233    .text.digit_swapper_set_time:0000000000000000 digit_swapper_set_time
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:292    .text.digit_swapper_set_time:0000000000000058 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:298    .text.digit_swapper_enable_blink:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:304    .text.digit_swapper_enable_blink:0000000000000000 digit_swapper_enable_blink
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:354    .text.digit_swapper_enable_blink:0000000000000020 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:359    .text.digit_swapper_disable_blink:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:365    .text.digit_swapper_disable_blink:0000000000000000 digit_swapper_disable_blink
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:421    .text.digit_swapper_disable_blink:0000000000000028 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:426    .text.next_digit:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:432    .text.next_digit:0000000000000000 next_digit
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:485    .text.next_digit:000000000000003c $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:489    .text.next_digit:0000000000000040 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:591    .text.next_digit:00000000000000bc $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:599    .text.TIM2_IRQHandler:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:605    .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:644    .text.TIM4_IRQHandler:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:650    .text.TIM4_IRQHandler:0000000000000000 TIM4_IRQHandler
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:721    .text.TIM4_IRQHandler:0000000000000040 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:749    .bss.gap_flag:0000000000000000 gap_flag
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:743    .bss.digit_idx:0000000000000000 digit_idx
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:783    .data.display:0000000000000000 display
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:773    .data.digit_3:0000000000000000 digit_3
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:764    .data.digit_2:0000000000000000 digit_2
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:755    .data.digit_1:0000000000000000 digit_1
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:737    .bss.digit_0:0000000000000000 digit_0
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:734    .bss.digit_0:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:744    .bss.digit_idx:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:750    .bss.gap_flag:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:752    .data.digit_1:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:761    .data.digit_2:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:770    .data.digit_3:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccnn5Arc.s:779    .data.display:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 decoder_init
